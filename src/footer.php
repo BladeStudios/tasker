@@ -1,0 +1,1 @@
+<footer class="footer">Powered by BladeStudios (C) 2022</footer>

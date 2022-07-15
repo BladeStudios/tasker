@@ -3,7 +3,7 @@
     if(!isset($_SESSION['lang']))
         $_SESSION['lang'] = 'pl_PL';
 
-    require('lang/'.$_SESSION['lang'].'.php');
+    require_once('lang/'.$_SESSION['lang'].'.php');
 ?>
 
 <html>
@@ -13,17 +13,9 @@
 </head>
 <body>
 
-<div id="top">
-    <div id="app_title">TASKER</div>
-    <div id="app_desc">Online Task Manager</div>
-</div>
-<div id="menu">
-    <span class="menu_link"><?php echo $lang['home']; ?></span>
-    <span class="menu_link"><?php echo $lang['login']; ?></span>
-    <span class="menu_link"><?php echo $lang['register']; ?></span>
-</div>
+<?php require('src/header.php'); ?>
 <div id="container"></div>
-<footer class="footer">Powered by BladeStudios (C) 2022</footer>
+<?php require('src/footer.php'); ?>
 
 </body>
 </html>
