@@ -15,7 +15,7 @@
     <span class="menu_link">link 3</span>
 </div>
 <div id="container"></div>
-<div id="footer">Powered by BladeStudios (C) 2022</div>
+<footer class="footer">Powered by BladeStudios (C) 2022</footer>
 
 </body>
 </html>

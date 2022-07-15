@@ -1,8 +1,16 @@
+html
+{
+    height: 100%;
+}
 body
 {
     font-family: Verdana;
-    background-color: #9999FF;
+    background-color: #AAAAFF;
     text-align: center;
+    height: 100%;
+    display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
 div
@@ -20,4 +28,14 @@ div
 {
     color: green;
     font-weight: bold;
+}
+
+#container
+{
+    flex: 1 0 auto;
+}
+
+.footer
+{
+    flex-shrink: 0;
 }
