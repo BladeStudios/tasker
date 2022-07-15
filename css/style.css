@@ -1,0 +1,23 @@
+body
+{
+    font-family: Verdana;
+    background-color: #9999FF;
+    text-align: center;
+}
+
+div
+{
+    border: solid black 2px;
+}
+
+#app_title
+{
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.menu_link
+{
+    color: green;
+    font-weight: bold;
+}
