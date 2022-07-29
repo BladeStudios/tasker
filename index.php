@@ -13,9 +13,9 @@
 </head>
 <body>
 
-<?php require('src/header.php'); ?>
+<?php require('views/header.php'); ?>
 <div id="container"></div>
-<?php require('src/footer.php'); ?>
+<?php require('views/footer.php'); ?>
 
 </body>
 </html>
