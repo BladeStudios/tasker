@@ -2,6 +2,9 @@
     $lang = array (
         'login' => 'zaloguj się',
         'register' => 'zarejestruj się',
-        'home' => 'strona główna'
+        'home' => 'strona główna',
+        'nick' => 'Login',
+        'password' => 'Hasło',
+        'loginbutton' => 'Zaloguj'
     )
 ?>
