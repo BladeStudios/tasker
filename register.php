@@ -8,7 +8,7 @@
 
 <html>
 <head>
-    <title>Index - Tasker (Powered by BladeStudios (C) 2022)</title>
+    <title>Register - Tasker (Powered by BladeStudios (C) 2022)</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
