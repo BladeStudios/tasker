@@ -69,6 +69,11 @@ CREATE TABLE tasker.task_statuses (
     name varchar(32) NOT NULL COMMENT 'task status name, like TODO, IN PROGRESS, PAUSED, DONE, REMOVED'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE tasker.task_difficulties (
+    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'task difficulty level ID',
+    name varchar(32) NOT NULL COMMENT 'task difficulty name, like EASY, MEDIUM, HARD'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE tasker.tasks (
     id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'task ID',
     creator_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who created the task',
@@ -80,8 +85,12 @@ CREATE TABLE tasker.tasks (
     started DATETIME DEFAULT NULL COMMENT 'date and time when the user started or restarted doing the task',
     stopped DATETIME DEFAULT NULL COMMENT 'date and time when the user stopped doing the task (by finishing it or pausing it)',
     status_id int(10) UNSIGNED NOT NULL COMMENT 'status type ID',
+    difficulty_id int(10) UNSIGNED NOT NULL COMMENT 'difficulty level ID',
+    base_exp int(10) UNSIGNED NOT NULL COMMENT 'base number of experience points for finishing the task',
+    time_exp int(10) UNSIGNED NOT NULL COMMENT 'number of experience points per minute of doing the task',
     FOREIGN KEY (creator_id) REFERENCES users(id),
     FOREIGN KEY (executor_id) REFERENCES users(id),
     FOREIGN KEY (type_id) REFERENCES task_types(id),
-    FOREIGN KEY (status_id) REFERENCES task_statuses(id)
+    FOREIGN KEY (status_id) REFERENCES task_statuses(id),
+    FOREIGN KEY (difficulty_id) REFERENCES task_difficulties(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
