@@ -13,12 +13,13 @@ class Database
         {
             $this->dbConn = new PDO("mysql:host=$host;dbname=$db_name",$db_user,$db_password);
             $this->dbConn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+            return $this->dbConn;
         }
         catch(PDOException $e)
         {
             $logger = new Logger();
             $logger->log('Cannot connect to database '.$db_name.'. Error: '.$e->getMessage());
+            return null;
         }
     }
 
