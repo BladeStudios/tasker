@@ -15,6 +15,7 @@
         'e_password_length' => 'Hasło musi mieć od 8 do 32 znaków!',
         'e_password_identical' => 'Podane hasła nie są identyczne!',
         'e_email_exists' => 'Istnieje już konto przypisane do tego adresu e-mail!',
-        'e_nick_exists' => 'Istnieje już konto z tym nickiem!'
+        'e_nick_exists' => 'Istnieje już konto z tym nickiem!',
+        'registration_successful' => 'Pomyślnie zarejestrowano konto. Możesz się zalogować.'
     )
 ?>

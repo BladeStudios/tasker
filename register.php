@@ -123,7 +123,7 @@
                     if($user->addUser($login,$password1,$email,$ip,$time,$user_browser,$user_os))
                     {
                         $_SESSION['registered'] = true;
-                        header('Location: index.php');
+                        header('Location: login.php');
                     }
                     else
                     {

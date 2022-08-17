@@ -16,7 +16,14 @@
 <?php require('header.php'); ?>
 <div id="container">
     <br>
-    <div id="registerform">
+    <?php
+        if($_SESSION['registered']===true)
+        {
+            echo '<div style="color: red; font-family: Verdana; font-size: 15pt">'.$lang['registration_successful'].'</div>';
+            $_SESSION['registered']=false;
+        }
+    ?>
+    <div id="loginform">
         <form action="src/loginengine.php" method="post">
             <?php echo $lang["nick"] ?><br/><input type="text" name="login"/><br/>
             <?php echo $lang["password"] ?><br/><input type="password" name="password"/><br/>
