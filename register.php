@@ -13,9 +13,8 @@
 </head>
 <body>
 
-<?php require('header.php'); ?>
-<!--start TODO-->
-<?php
+<?php 
+    require('header.php');
     if(isset($_POST['email']))
     {
         //czy udana walidacja
@@ -70,13 +69,11 @@
         $_SESSION['temp_email'] = $email;
 
         require_once('database/Database.class.php');
-        //mysqli_report(MYSQLI_REPORT_STRICT); //exceptions zamiast warningow
 
         try
         {
             $database = new Database();
             $connection = $database->connect();
-            //$connection = new mysqli($host, $db_user, $db_password, $db_name);
             if($connection==null)
             {
                 throw new Exception("Cannot connect to the database.");
@@ -107,7 +104,6 @@
                     $_SESSION['e_nick'] = $lang['e_nick_exists'];
                 }
 
-                //TODO od tego miejsca
                 if($ok==true)
                 {
                     require_once('src/Info.class.php');
@@ -140,7 +136,7 @@
             echo '<br/>Error info: '.$e;
         }
     }
-?> <!--end TODO-->
+?>
 
 <div id="container">
 <br>
