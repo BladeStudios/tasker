@@ -87,7 +87,10 @@
                 //czy istnieje taki sam e-mail w bazie danych
                 $how_many_emails = count($user->getIdByEmail($email));
                 if($how_many_emails==-1)
-                    exit;
+                {
+                    $_SESSION['error_registration']=$lang['e_registration'];
+                    header('Location: register.php');
+                }
 
                 if($how_many_emails>0)
                 {
@@ -97,7 +100,10 @@
 
                 $how_many_nicks = count($user->getIdByLogin($login));
                 if($how_many_nicks==-1)
-                    exit;
+                {
+                    $_SESSION['error_registration']=$lang['e_registration'];
+                    header('Location: register.php');
+                }
 
                 if($how_many_nicks>0)
                 {
@@ -142,6 +148,13 @@
 <div id="container">
 <br>
     <div id="registerform">
+        <?php
+			if (isset($_SESSION['error_registration']))
+			{
+				echo '<div class="error">'.$_SESSION['e_registration'].'</div>';
+				unset($_SESSION['e_registration']);
+			}
+		?>
         <form method="post">
             <?php echo $lang["login"] ?><br/><input type="text" value="<?php
             if(isset($_SESSION['temp_nick']))

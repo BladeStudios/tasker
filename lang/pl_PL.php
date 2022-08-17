@@ -16,6 +16,7 @@
         'e_password_identical' => 'Podane hasła nie są identyczne!',
         'e_email_exists' => 'Istnieje już konto przypisane do tego adresu e-mail!',
         'e_nick_exists' => 'Istnieje już konto z tym nickiem!',
-        'registration_successful' => 'Pomyślnie zarejestrowano konto. Możesz się zalogować.'
+        'registration_successful' => 'Pomyślnie zarejestrowano konto. Możesz się zalogować.',
+        'e_registration' => 'Nie udało się zarejestrować konta. Skontaktuj się z administratorem.'
     )
 ?>
