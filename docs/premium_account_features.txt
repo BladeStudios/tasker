@@ -1,7 +1,13 @@
 REGULAR ACCOUNT
 
-* 20 tasks per day limit
+* 25 tasks per day limit
+* limit of 50 friends
+* max 10 friends added per day
 
 PREMIUM ACCOUNT
 
 * 500 tasks per day limit
+* limit of 1000 friends
+* max 200 friends added per day
+
+# limits on both account types are preventing flooding the server/database
