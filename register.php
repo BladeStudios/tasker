@@ -14,7 +14,177 @@
 <body>
 
 <?php require('header.php'); ?>
-<div id="container"></div>
+<!--start TODO-->
+<?php
+    if(isset($_POST['email']))
+    {
+        //czy udana walidacja
+        $ok = true;
+
+        //walidacja nickname
+        $login = $_POST['nick'];
+
+        if(mb_strlen($login)<3 || mb_strlen($login)>32)
+        {
+            $ok = false;
+            $_SESSION['e_nick'] = $lang['e_nick_length'];
+        }
+        if(ctype_alnum($login)==false)
+        {
+            $ok = false;
+            $_SESSION['e_nick'] = $lang['e_nick_letters'];
+        }
+
+        //walidacja e-maila
+        $email = $_POST['email'];
+        $email2 = filter_var($email,FILTER_SANITIZE_EMAIL);
+
+        if(filter_var($email2,FILTER_VALIDATE_EMAIL)==false || $email2!=$email)
+        {
+            $ok = false;
+            $_SESSION['e_email'] = $lang['e_email_incorrect'];
+        }
+
+        //walidacja hasla
+        $password1 = $_POST['password1'];
+        $password2 = $_POST['password2'];
+
+        if(strlen($password1)<8 || strlen($password1)>32)
+        {
+            $ok = false;
+            $_SESSION['e_password'] = $lang['e_password_length'];
+        }
+
+        if($password1 != $password2)
+        {
+            $ok = false;
+            $_SESSION['e_password'] = $lang['e_password_identical'];
+        }
+
+        $password_hash = password_hash($password1, PASSWORD_DEFAULT);
+
+        //miejsce na inne walidacje (regulamin, recaptcha)
+
+        //zapamietanie wprowadzonych danych
+        $_SESSION['temp_nick'] = $login;
+        $_SESSION['temp_email'] = $email;
+
+        require_once('database/Database.class.php');
+        //mysqli_report(MYSQLI_REPORT_STRICT); //exceptions zamiast warningow
+
+        try
+        {
+            $database = new Database();
+            $connection = $database->connect();
+            //$connection = new mysqli($host, $db_user, $db_password, $db_name);
+            if($connection==null)
+            {
+                throw new Exception("Cannot connect to the database.");
+            }
+            else
+            {
+                require_once('database/Users.class.php');
+                $user = new User();
+
+                //czy istnieje taki sam e-mail w bazie danych
+                $how_many_emails = count($user->getIdByEmail($email));
+                if($how_many_emails==-1)
+                    exit;
+
+                if($how_many_emails>0)
+                {
+                    $ok = false;
+                    $_SESSION['e_email'] = $lang['e_email_exists'];
+                }
+
+                $how_many_nicks = count($user->getIdByLogin($login));
+                if($how_many_nicks==-1)
+                    exit;
+
+                if($how_many_nicks>0)
+                {
+                    $ok = false;
+                    $_SESSION['e_nick'] = $lang['e_nick_exists'];
+                }
+
+                //TODO od tego miejsca
+                if($ok==true)
+                {
+                    require_once('src/Info.class.php');
+                    $info = new Info();
+
+                    $time = $info->getTime(); //timestamp
+                    $ip = $info->getIp(); //ip
+                    $country = $info->getCountry(); //country
+                    $language = $info->getLanguage(); //language
+                    $user_os = $info->getOS(); //operating system
+                    $user_browser = $info->getBrowser(); //web browser
+
+                    if($user->addUser($login,$password1,$email,$ip,$time,$user_browser,$user_os))
+                    {
+                        $_SESSION['registered'] = true;
+                        header('Location: index.php');
+                    }
+                    else
+                    {
+                        throw new Exception("Cannot add user.");
+                    }
+                }
+
+                $database->disconnect();
+            }
+        }
+        catch (Exception $e)
+        {
+            echo '<span style="color: red;">Server error. Please contact administrator.</span>';
+            echo '<br/>Error info: '.$e;
+        }
+    }
+?> <!--end TODO-->
+
+<div id="container">
+<br>
+    <div id="registerform">
+        <form method="post">
+            <?php echo $lang["nick"] ?><br/><input type="text" value="<?php
+            if(isset($_SESSION['temp_nick']))
+            {
+                echo $_SESSION['temp_nick'];
+                unset ($_SESSION['temp_nick']);
+            }?>" name="nick"/><br/>
+            <?php
+			if (isset($_SESSION['e_nick']))
+			{
+				echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
+				unset($_SESSION['e_nick']);
+			}
+		    ?>
+            <?php echo $lang["password"] ?><br/><input type="password" name="password1"/><br/>
+            <?php
+			if (isset($_SESSION['e_password']))
+			{
+				echo '<div class="error">'.$_SESSION['e_password'].'</div>';
+				unset($_SESSION['e_password']);
+			}
+		    ?>
+            <?php echo $lang["passwordrepeat"] ?><br/><input type="password" name="password2"/><br/>
+            <?php echo $lang["email"] ?><br/><input type="text" value="<?php
+            if(isset($_SESSION['temp_email']))
+            {
+                echo $_SESSION['temp_email'];
+                unset ($_SESSION['temp_email']);
+            }?>" name="email"/><br/>
+            <?php
+			if (isset($_SESSION['e_email']))
+			{
+				echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+				unset($_SESSION['e_email']);
+			}
+		    ?>
+            </br><input type="submit" class="btn btn-success center-in-div" value="<?php echo $lang["registerbutton"] ?>"/>
+        </form>
+    </div>
+</div>
 <?php require('footer.php'); ?>
 
 </body>

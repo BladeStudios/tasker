@@ -6,8 +6,8 @@ class Database
 
     public function connect()
     {
-        require_once('db_config.php');
-        require('src/Logger.class.php');
+        require('db_config.php');
+        require_once('src/Logger.class.php');
 
         try
         {
