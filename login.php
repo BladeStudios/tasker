@@ -20,7 +20,7 @@
     <?php
         if($_SESSION['registered']===true)
         {
-            echo '<div style="color: red; font-family: Verdana; font-size: 15pt">'.$lang['registration_successful'].'</div>';
+            echo '<div style="color: green; font-family: Verdana; font-size: 15pt">'.$lang['registration_successful'].'</div>';
             $_SESSION['registered']=false;
         }
     ?>
