@@ -116,7 +116,7 @@
                     $user_os = $info->getOS(); //operating system
                     $user_browser = $info->getBrowser(); //web browser
 
-                    if($user->addUser($login,$password1,$email,$ip,$time,$user_browser,$user_os))
+                    if($user->addUser($login,$password_hash,$email,$ip,$time,$user_browser,$user_os))
                     {
                         $_SESSION['registered'] = true;
                         header('Location: login.php');
