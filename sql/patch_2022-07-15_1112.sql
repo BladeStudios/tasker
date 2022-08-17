@@ -76,6 +76,11 @@ CREATE TABLE tasker.task_difficulties (
     name varchar(32) NOT NULL COMMENT 'task difficulty name, like EASY, MEDIUM, HARD'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE tasker.task_visibilities (
+    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'task visibility level ID',
+    description varchar(256) NOT NULL COMMENT 'description of visibility level'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE tasker.tasks (
     id int(10) UNSIGNED AUTO_INCREMENT COMMENT 'task ID',
     creator_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who created the task',
@@ -90,12 +95,14 @@ CREATE TABLE tasker.tasks (
     difficulty_id int(10) UNSIGNED NOT NULL COMMENT 'difficulty level ID',
     base_exp int(10) UNSIGNED NOT NULL COMMENT 'base number of experience points for finishing the task',
     time_exp int(10) UNSIGNED NOT NULL COMMENT 'number of experience points per minute of doing the task',
+    visibility_id int(10) UNSIGNED NOT NULL COMMENT 'task visibility level for other users'
     PRIMARY KEY (id),
     FOREIGN KEY (creator_id) REFERENCES users(id),
     FOREIGN KEY (executor_id) REFERENCES users(id),
     FOREIGN KEY (type_id) REFERENCES task_types(id),
     FOREIGN KEY (status_id) REFERENCES task_statuses(id),
-    FOREIGN KEY (difficulty_id) REFERENCES task_difficulties(id)
+    FOREIGN KEY (difficulty_id) REFERENCES task_difficulties(id),
+    FOREIGN KEY (visibility_id) REFERENCES task_visibilities(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tasker.positions (id, name) VALUES (0, 'user');
@@ -124,3 +131,8 @@ INSERT INTO tasker.task_statuses (id, name) VALUES (4, 'REMOVED');
 INSERT INTO tasker.task_difficulties (id, name) VALUES (0, 'easy');
 INSERT INTO tasker.task_difficulties (id, name) VALUES (1, 'medium');
 INSERT INTO tasker.task_difficulties (id, name) VALUES (2, 'hard');
+
+INSERT INTO tasker.task_visibilities (id, description) VALUES (0, 'only task creator and task executor can see it');
+INSERT INTO tasker.task_visibilities (id, description) VALUES (1, "task creator, task executor and task executor's friends can see it");
+INSERT INTO tasker.task_visibilities (id, description) VALUES (2, "task creator, task executor, task creator's friends and task executor's friends can see it");
+INSERT INTO tasker.task_visibilities (id, description) VALUES (3, 'everyone can see it');
