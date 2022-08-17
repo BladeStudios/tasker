@@ -132,7 +132,7 @@
         }
         catch (Exception $e)
         {
-            echo '<span style="color: red;">Server error. Please contact administrator.</span>';
+            echo '<span style="color: red;">Registration failed. Please contact administrator.</span>';
             echo '<br/>Error info: '.$e;
         }
     }
