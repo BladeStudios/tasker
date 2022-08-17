@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Register - Tasker (Powered by BladeStudios (C) 2022)</title>
+    <link rel="stylesheet" href="libs/bootstrap-3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -142,7 +143,7 @@
 <br>
     <div id="registerform">
         <form method="post">
-            <?php echo $lang["nick"] ?><br/><input type="text" value="<?php
+            <?php echo $lang["login"] ?><br/><input type="text" value="<?php
             if(isset($_SESSION['temp_nick']))
             {
                 echo $_SESSION['temp_nick'];

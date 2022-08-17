@@ -1,9 +1,9 @@
 <?php
     $lang = array (
-        'login' => 'zaloguj się',
-        'register' => 'zarejestruj się',
-        'home' => 'strona główna',
-        'nick' => 'Login',
+        'log in' => 'Zaloguj się',
+        'register' => 'Zarejestruj się',
+        'home' => 'Strona główna',
+        'login' => 'Login',
         'password' => 'Hasło',
         'passwordrepeat' => 'Powtórz hasło',
         'loginbutton' => 'Zaloguj',
