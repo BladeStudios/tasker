@@ -1,6 +1,6 @@
 <?php
     $lang = array (
-        'log in' => 'Zaloguj się',
+        'log_in' => 'Zaloguj się',
         'register' => 'Zarejestruj się',
         'home' => 'Strona główna',
         'login' => 'Login',
@@ -21,6 +21,8 @@
         'e_login' => 'Nie udało się zalogować. Skontaktuj się z administratorem.',
         'e_unknown' => 'Wystąpił nieznany błąd. Skontaktuj się z administratorem.',
         'e_exception' => 'Wystąpił błąd: ',
-        'e_wrong_credentials' => 'Niepoprawne dane logowania. Spróbuj jeszcze raz.'
+        'e_wrong_credentials' => 'Niepoprawne dane logowania. Spróbuj jeszcze raz.',
+        'logged_in_as' => 'ZALOGOWANY JAKO ',
+        'logout' => ' (WYLOGUJ)'
     )
 ?>
