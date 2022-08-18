@@ -76,7 +76,7 @@ class User
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "SELECT id FROM users WHERE email=:email";
+            $sql = "SELECT id FROM ".$this->tableName." WHERE email=:email";
 
             $st = $conn->prepare($sql);
             $st->bindParam('email',$email);
@@ -104,7 +104,7 @@ class User
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "SELECT id FROM users WHERE login=:login";
+            $sql = "SELECT id FROM ".$this->tableName." WHERE login=:login";
 
             $st = $conn->prepare($sql);
             $st->bindParam('login',$login);
@@ -132,7 +132,7 @@ class User
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "SELECT * FROM users WHERE login=:login";
+            $sql = "SELECT * FROM ".$this->tableName." WHERE login=:login";
 
             $st = $conn->prepare($sql);
             //$st->bindParam('login',$login);
@@ -163,7 +163,7 @@ class User
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "UPDATE users SET last_ip=:last_ip, current_ip=:current_ip, status_id=1, online_from=:current_time, last_activity=:current_time, system=:user_os, browser=:user_browser WHERE id=:id";
+            $sql = "UPDATE ".$this->tableName." SET last_ip=:last_ip, current_ip=:current_ip, status_id=1, online_from=:current_time, last_activity=:current_time, system=:user_os, browser=:user_browser WHERE id=:id";
 
             $st = $conn->prepare($sql);
             
@@ -201,7 +201,7 @@ class User
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "UPDATE users SET status_id=0, last_activity=:current_time, total_online_time=:new_total_online_time WHERE id=:id";
+            $sql = "UPDATE ".$this->tableName." SET status_id=0, last_activity=:current_time, total_online_time=:new_total_online_time WHERE id=:id";
 
             $st = $conn->prepare($sql);
 
@@ -245,7 +245,7 @@ class User
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "SELECT * FROM users WHERE id=:id";
+            $sql = "SELECT * FROM ".$this->tableName." WHERE id=:id";
 
             $st = $conn->prepare($sql);
             //$st->bindParam('login',$login);
