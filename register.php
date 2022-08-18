@@ -93,7 +93,8 @@
                 if($how_many_emails==-1)
                 {
                     $_SESSION['error_registration']=$lang['e_registration'];
-                    header('Location: register.php');
+                    $database->disconnect();
+                    exit(header('Location: register.php'));
                 }
 
                 if($how_many_emails>0)
@@ -106,7 +107,8 @@
                 if($how_many_nicks==-1)
                 {
                     $_SESSION['error_registration']=$lang['e_registration'];
-                    header('Location: register.php');
+                    $database->disconnect();
+                    exit(header('Location: register.php'));
                 }
 
                 if($how_many_nicks>0)
@@ -130,7 +132,8 @@
                     if($user->addUser($login,$password_hash,$email,$ip,$time,$user_browser,$user_os))
                     {
                         $_SESSION['registered'] = true;
-                        header('Location: login.php');
+                        $database->disconnect();
+                        exit(header('Location: login.php'));
                     }
                     else
                     {

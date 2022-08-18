@@ -7,10 +7,7 @@
     require_once('database/Database.class.php');
 
     if(!isset($_POST['login']) || !isset($_POST['password']))
-    {
-        header('Location: login.php');
-        exit();
-    }
+        exit(header('Location: login.php'));
 
     try
     {
@@ -56,7 +53,8 @@
                     if($user->updateUser($row['id'],$row['current_ip'],$ip,$time,$user_os,$user_browser))
                     {
                         unset($_SESSION['error']);
-                        header('Location: index.php');
+                        $database->disconnect();
+                        exit(header('Location: index.php'));
                     }
                     else
                     {
@@ -64,26 +62,30 @@
                         $_SESSION['loggedin'] = false;
                         unset($_SESSION['id']);
                         unset($_SESSION['login']);
-                        header('Location: login.php');
+                        $database->disconnect();
+                        exit(header('Location: login.php'));
                     }
                 }
                 else
                 {
                     $_SESSION['error']=$lang['e_wrong_credentials'];
-                    header('Location: login.php');
+                    $database->disconnect();
+                    exit(header('Location: login.php'));
                 }
             }
             else if($users_amount==-1)
             {
                 //error during query
                 $_SESSION['error']=$lang['e_unknown'];
-                header('Location: login.php');
+                $database->disconnect();
+                exit(header('Location: login.php'));
             }
             else
             {
                 //wrong login
                 $_SESSION['error']=$lang['e_wrong_credentials'];
-                header('Location: login.php');
+                $database->disconnect();
+                exit(header('Location: login.php'));
             }
             
 
@@ -93,6 +95,6 @@
     catch (Exception $e)
     {
         $_SESSION['error']=$lang['e_exception'].$e;
-        header('Location: login.php');
+        exit(header('Location: login.php'));
     }
 ?>
