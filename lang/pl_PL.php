@@ -28,7 +28,7 @@
         'title_register' => 'Rejestracja',
         'logout_successful' => 'Nastąpiło pomyślne wylogowanie.',
         'logout_failed' => 'Wystąpił błąd przy wylogowywaniu. Skontaktuj się z administratorem.',
-        'tasker_description' => 'Tasker to internetowe narzędzie do zarządzania zadaniami. Umożliwia dodawanie zadań z różnymi opcjami, takimi jak ustawienie poziomu trudności zadania, statusu jego wykonania (do zrobienia, w trakcie, zrobiony itp.). Możliwy jest pomiar czasu, gdy wykonujemy zadanie, a następnie im dłuższe i trudniejsze zadanie tym więcej punktów doświadczenia otrzymuje użytkownik. Kolejną funkcją jest opcja przypisania zadania do innego użytkownika, którego mamy na liście znajomych.
-        Wszelkie pytania i propozycje współpracy prosimy kierować pod adres <a href="mailto:bladestudiosit@gmail.com">bladestudiosit@gmail.com</a>.'
+        'tasker_description' => 'Tasker to internetowe narzędzie do zarządzania zadaniami. Umożliwia dodawanie zadań z różnymi opcjami, takimi jak ustawienie poziomu trudności zadania, statusu jego wykonania (do zrobienia, w trakcie, zrobiony itp.). Możliwy jest pomiar czasu, gdy wykonujemy zadanie, a następnie im dłuższe i trudniejsze zadanie tym więcej punktów doświadczenia otrzymuje użytkownik. Kolejną funkcją jest opcja przypisania zadania do innego użytkownika, którego mamy na liście znajomych.<br><br>Wszelkie pytania i propozycje współpracy prosimy kierować pod adres <a href="mailto:bladestudiosit@gmail.com">bladestudiosit@gmail.com</a>.',
+        'add-task' => 'Dodaj zadanie'
     )
 ?>
