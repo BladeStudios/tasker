@@ -5,7 +5,7 @@ class MenuFunctions
     public function logout($id)
     {
         require_once('database/Database.class.php');
-        require_once('database/Users.class.php');
+        require_once('database/User.class.php');
 
         $user = new User();
         $result = $user->onLogout($id);

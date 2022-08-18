@@ -61,7 +61,7 @@ class User
         {
             require_once('src/Logger.class.php');
             $logger = new Logger();
-            $logger->log('PDO Exception in Users.class.php:addUser(). Error info: '.$e->getMessage());
+            $logger->log('PDO Exception in User.class.php:addUser(). Error info: '.$e->getMessage());
             return false;
         }
         
@@ -90,7 +90,7 @@ class User
         {
             require_once('src/Logger.class.php');
             $logger = new Logger();
-            $logger->log('PDO Exception in Users.class.php:getIdByEmail(). Error info: '.$e->getMessage());
+            $logger->log('PDO Exception in User.class.php:getIdByEmail(). Error info: '.$e->getMessage());
             return -1;
         }  
     }
@@ -118,7 +118,7 @@ class User
         {
             require_once('src/Logger.class.php');
             $logger = new Logger();
-            $logger->log('PDO Exception in Users.class.php:getIdByLogin(). Error info: '.$e->getMessage());
+            $logger->log('PDO Exception in User.class.php:getIdByLogin(). Error info: '.$e->getMessage());
             return -1;
         }  
     }
@@ -149,7 +149,7 @@ class User
         {
             require_once('src/Logger.class.php');
             $logger = new Logger();
-            $logger->log('PDO Exception in Users.class.php:getUserByLogin(). Error info: '.$e->getMessage());
+            $logger->log('PDO Exception in User.class.php:getUserByLogin(). Error info: '.$e->getMessage());
             return -1;
         }  
     }
@@ -185,7 +185,7 @@ class User
         {
             require_once('src/Logger.class.php');
             $logger = new Logger();
-            $logger->log('PDO Exception in Users.class.php:updateUser(). Error info: '.$e->getMessage());
+            $logger->log('PDO Exception in User.class.php:updateUser(). Error info: '.$e->getMessage());
             return false;
         } 
     }
@@ -231,7 +231,7 @@ class User
         {
             require_once('src/Logger.class.php');
             $logger = new Logger();
-            $logger->log('PDO Exception in Users.class.php:updateUser(). Error info: '.$e->getMessage());
+            $logger->log('PDO Exception in User.class.php:updateUser(). Error info: '.$e->getMessage());
             return false;
         } 
     }
@@ -263,7 +263,7 @@ class User
         {
             require_once('src/Logger.class.php');
             $logger = new Logger();
-            $logger->log('PDO Exception in Users.class.php:getUserById(). Error info: '.$e->getMessage());
+            $logger->log('PDO Exception in User.class.php:getUserById(). Error info: '.$e->getMessage());
             return false;
         }
     }

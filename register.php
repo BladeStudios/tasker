@@ -85,7 +85,7 @@
             }
             else
             {
-                require_once('database/Users.class.php');
+                require_once('database/User.class.php');
                 $user = new User();
 
                 //czy istnieje taki sam e-mail w bazie danych

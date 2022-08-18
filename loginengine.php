@@ -19,7 +19,7 @@
         }
         else
         {
-            require_once('database/Users.class.php');
+            require_once('database/User.class.php');
             $user = new User();
 
             $login = $_POST['login'];
