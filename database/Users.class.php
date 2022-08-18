@@ -256,7 +256,8 @@ class User
             $st->execute($data);
             $st->setFetchMode(PDO::FETCH_ASSOC);
             $db_obj->disconnect();
-            return $st->fetchAll();
+            $result = $st->fetchAll();
+            return $result[0];
         }
         catch(PDOException $e)
         {

@@ -8,14 +8,13 @@ class MenuFunctions
         require_once('database/Users.class.php');
 
         $user = new User();
-        if($user->onLogout($id))
-        {
-            $_SESSION['loggedin'] = false;
-            unset($_SESSION['id']);
-            unset($_SESSION['login']);
-            return true;
-        }
-        else return false;
+        $result = $user->onLogout($id);
+
+        $_SESSION['loggedin'] = false;
+        unset($_SESSION['id']);
+        unset($_SESSION['login']);
+        
+        return $result;
     }
 
     public function isLoggedIn()

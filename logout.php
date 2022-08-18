@@ -9,8 +9,10 @@
     $menuFunctions = new MenuFunctions();
     if($menuFunctions->isLoggedIn())
     {
-        $menuFunctions->logout($_SESSION['id']);
-        $_SESSION['info'] = $lang['logout_successful'];
+        if($menuFunctions->logout($_SESSION['id']))
+            $_SESSION['info'] = $lang['logout_successful'];
+        else
+            $_SESSION['error'] = $lang['logout_failed'];
     }
     else
         $_SESSION['error'] = $lang['logout_failed'];
