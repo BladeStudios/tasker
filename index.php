@@ -24,7 +24,7 @@
     }
     if(isset($_SESSION['info']))
     {
-        echo '<div style="color: green; font-family: Verdana; font-size: 15pt">'.$_SESSION['info'].'</div>';
+        echo '<div style="color: blue; font-family: Verdana; font-size: 15pt">'.$_SESSION['info'].'</div>';
         unset($_SESSION['info']);
     }
 ?>
