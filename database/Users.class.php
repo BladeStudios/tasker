@@ -189,6 +189,83 @@ class User
             return false;
         } 
     }
+
+    public function onLogout($id)
+    {
+        require_once('database/Database.class.php');
+        require_once('src/Info.class.php');
+        require_once('src/Calc.class.php');
+
+        try
+        {
+            $db_obj = new Database();
+            $conn = $db_obj->connect();
+
+            $sql = "UPDATE users SET status_id=0, last_activity=:current_time, total_online_time=:new_total_online_time WHERE id=:id";
+
+            $st = $conn->prepare($sql);
+
+            $info = new Info();
+            $current_time = $info->getTime();
+
+            $user = $this->getUserById($id);
+
+            $calc = new Calc();
+            $online_time = $calc->getSecondsBetweenDates($user['online_from'],$current_time);
+
+            $new_total_online_time = $user['total_online_time'] + $online_time;
+
+            
+            $data = [
+                'id' => $id,
+                'current_time' => $current_time,
+                'new_total_online_time' => $new_total_online_time
+            ];
+
+            $st->execute($data);
+            $st->setFetchMode(PDO::FETCH_ASSOC);
+            $db_obj->disconnect();
+            return true;
+        }
+        catch(PDOException $e)
+        {
+            require_once('src/Logger.class.php');
+            $logger = new Logger();
+            $logger->log('PDO Exception in Users.class.php:updateUser(). Error info: '.$e->getMessage());
+            return false;
+        } 
+    }
+
+    public function getUserById($id)
+    {
+        require_once('database/Database.class.php');
+
+        try
+        {
+            $db_obj = new Database();
+            $conn = $db_obj->connect();
+
+            $sql = "SELECT * FROM users WHERE id=:id";
+
+            $st = $conn->prepare($sql);
+            //$st->bindParam('login',$login);
+            $data = [
+                'id' => $id
+            ];
+
+            $st->execute($data);
+            $st->setFetchMode(PDO::FETCH_ASSOC);
+            $db_obj->disconnect();
+            return $st->fetchAll();
+        }
+        catch(PDOException $e)
+        {
+            require_once('src/Logger.class.php');
+            $logger = new Logger();
+            $logger->log('PDO Exception in Users.class.php:getUserById(). Error info: '.$e->getMessage());
+            return false;
+        }
+    }
 }
 
 
