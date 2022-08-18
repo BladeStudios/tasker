@@ -16,6 +16,18 @@
 
 <?php require('header.php'); ?>
 <div id="container">
+<?php
+    if(isset($_SESSION['error']))
+    {
+        echo '<div style="color: red; font-family: Verdana; font-size: 15pt">'.$_SESSION['error'].'</div>';
+        unset($_SESSION['error']);
+    }
+    if(isset($_SESSION['info']))
+    {
+        echo '<div style="color: green; font-family: Verdana; font-size: 15pt">'.$_SESSION['info'].'</div>';
+        unset($_SESSION['info']);
+    }
+?>
 </div>
 <?php require('footer.php'); ?>
 
