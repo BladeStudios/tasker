@@ -22,7 +22,7 @@
         'e_unknown' => 'An unknown error has occured. Please contact an administrator.',
         'e_exception' => 'An error occured: ',
         'e_wrong_credentials' => 'Invalid login credentials. Try again.',
-        'logged_in_as' => 'LOGGED IN AS',
+        'logged_in_as' => 'LOGGED IN AS ',
         'logout' => ' (LOGOUT)',
         'title_login' => 'Sign in',
         'title_register' => 'Register',
