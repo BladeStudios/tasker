@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Index - Tasker (Powered by BladeStudios (C) 2022)</title>
-    <link rel="stylesheet" href="libs/bootstrap-3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/bootstrap-4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>

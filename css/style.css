@@ -23,9 +23,10 @@ body
     font-weight: bold;
 }
 
-.menu_link
+.menu-link
 {
-    color: green;
+    margin-top: 5px;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
