@@ -153,7 +153,9 @@
 ?>
 
 <div id="container">
-<br>
+    <br>
+    <div id="title"><?php echo $lang['title_register']; ?></div>
+    <br>
     <div id="registerform">
         <?php
 			if (isset($_SESSION['error_registration']))

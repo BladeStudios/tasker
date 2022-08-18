@@ -1,7 +1,5 @@
-html
-{
-    height: 100%;
-}
+html { height: 100%; }
+
 body
 {
     font-family: Verdana;
@@ -12,11 +10,6 @@ body
   flex-direction: column;
   margin: 0;
 }
-
-/*div
-{
-    border: solid black 2px;
-}*/
 
 #top { border: solid black 2px; }
 #app_desc { border: solid black 2px; }
@@ -49,4 +42,11 @@ body
 .error
 {
     color: red;
+}
+
+#title
+{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: Verdana, Tahoma, sans-serif;
 }

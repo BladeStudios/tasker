@@ -21,6 +21,8 @@
 <?php require('header.php'); ?>
 <div id="container">
     <br>
+    <div id="title"><?php echo $lang['title_login']; ?></div>
+    <br>
     <?php
         if(isset($_SESSION['error']))
         {
