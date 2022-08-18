@@ -28,6 +28,7 @@
         unset($_SESSION['info']);
     }
 ?>
+<div id="text"><?php echo '<br>'.$lang['tasker_description']; ?></div>
 </div>
 <?php require('footer.php'); ?>
 
