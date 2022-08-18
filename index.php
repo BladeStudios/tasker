@@ -16,7 +16,6 @@
 
 <?php require('header.php'); ?>
 <div id="container">
-    <?php echo 'login: '.$_SESSION['login']; ?>
 </div>
 <?php require('footer.php'); ?>
 

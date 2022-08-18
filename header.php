@@ -8,7 +8,7 @@
     <?php 
         if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']===false)
         {
-            echo '<a href="login.php" class="menu_link">'.$lang['log_in'].'</a>';
+            echo '<a href="login.php" class="menu_link">'.$lang['log_in'].'&nbsp;</a>';
             echo '<a href="register.php" class="menu_link">'.$lang['register'].'</a>';
         }
         else
