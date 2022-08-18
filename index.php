@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['lang']))
-        $_SESSION['lang'] = 'pl_PL';
+        $_SESSION['lang'] = 'en_US';
 
     require_once('lang/'.$_SESSION['lang'].'.php');
 ?>
@@ -28,7 +28,6 @@
         unset($_SESSION['info']);
     }
 ?>
-<div id="text"><?php echo '<br>'.$lang['tasker_description']; ?></div>
 </div>
 <?php require('footer.php'); ?>
 

@@ -5,7 +5,7 @@
         exit(header('Location: index.php'));
 
     if(!isset($_SESSION['lang']))
-        $_SESSION['lang'] = 'pl_PL';
+        $_SESSION['lang'] = 'en_US';
 
     require_once('lang/'.$_SESSION['lang'].'.php');
 ?>
