@@ -50,3 +50,9 @@ body
     font-weight: bold;
     font-family: Verdana, Tahoma, sans-serif;
 }
+
+#text
+{
+    padding: 0 10%;
+    text-align: left;
+}
