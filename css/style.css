@@ -11,14 +11,13 @@ body
   margin: 0;
 }
 
-#top { border: solid black 2px; }
-#app_desc { border: solid black 2px; }
-#menu { border: solid black 2px; }
-#container { border: solid black 2px; }
+#app_desc { border-bottom: solid black 3px; }
+#menu { border-bottom: solid black 2px;}
+#container { border-bottom: solid black 2px; }
 
 #app_title
 {
-    border: solid black 2px;
+    border-bottom: solid black 3px;
     font-size: 50px;
     font-weight: bold;
 }
