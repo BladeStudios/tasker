@@ -9,14 +9,12 @@
         if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']===false)
         {
             echo '<a href="login.php" class="menu_link">'.$lang['log_in'].'</a>';
+            echo '<a href="register.php" class="menu_link">'.$lang['register'].'</a>';
         }
         else
         {
             echo '<a href="logout.php" class="menu_link">'.$lang['logged_in_as'].$_SESSION['login'].$lang['logout'].'</a>';
         }
-        
-        if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']===false)
-            echo '<a href="register.php" class="menu_link">'.$lang['register'].'</a>';
     
     ?>
    
