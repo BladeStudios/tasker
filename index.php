@@ -27,6 +27,15 @@
         echo '<div style="color: blue; font-family: Verdana; font-size: 15pt">'.$_SESSION['info'].'</div>';
         unset($_SESSION['info']);
     }
+
+    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']===true)
+    {
+        //
+    }
+    else
+    {
+        echo '<div id="text"><br>'.$lang['tasker_description'].'</div>';
+    }
 ?>
 </div>
 <?php require('footer.php'); ?>

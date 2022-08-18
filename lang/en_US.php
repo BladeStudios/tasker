@@ -29,6 +29,7 @@
         'logout_successful' => 'You have successfully logged out.',
         'logout_failed' => 'An error occured during logging out. Please contact an administrator.',
         'tasker_description' => 'Tasker is an online task manager. It lets you add tasks with different options, like setting up a task difficulty, a status (to do, in progress, done etc.). It is possible to take time during the task and after that the longer and harder task is, the more experience points user gets. Another function is an option to assign a task to other user, who is present on the friendlist.<br><br>In case of any questions and collaborate offers, please send an e-mail to <a href="mailto:bladestudiosit@gmail.com">bladestudiosit@gmail.com</a>.',
-        'add-task' => 'Add task'
+        'add-task' => 'Add task',
+        'task-list' => 'Task list'
     )
 ?>
