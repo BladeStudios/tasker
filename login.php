@@ -18,14 +18,19 @@
 <div id="container">
     <br>
     <?php
-        if($_SESSION['registered']===true)
+        if(isset($_SESSION['error']))
+        {
+            echo '<div style="color: red; font-family: Verdana; font-size: 15pt">'.$_SESSION['error'].'</div>';
+            unset($_SESSION['error']);
+        }
+        if(isset($_SESSION['registered']) && $_SESSION['registered']===true)
         {
             echo '<div style="color: green; font-family: Verdana; font-size: 15pt">'.$lang['registration_successful'].'</div>';
             $_SESSION['registered']=false;
         }
     ?>
     <div id="loginform">
-        <form action="src/loginengine.php" method="post">
+        <form action="loginengine.php" method="post">
             <?php echo $lang["login"] ?><br/><input type="text" name="login"/><br/>
             <?php echo $lang["password"] ?><br/><input type="password" name="password"/><br/>
             </br><input type="submit" class="btn btn-success center-in-div" value="<?php echo $lang["loginbutton"] ?>"/>

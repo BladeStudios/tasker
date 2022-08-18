@@ -17,6 +17,10 @@
         'e_email_exists' => 'Istnieje już konto przypisane do tego adresu e-mail!',
         'e_nick_exists' => 'Istnieje już konto z tym nickiem!',
         'registration_successful' => 'Pomyślnie zarejestrowano konto. Możesz się zalogować.',
-        'e_registration' => 'Nie udało się zarejestrować konta. Skontaktuj się z administratorem.'
+        'e_registration' => 'Nie udało się zarejestrować konta. Skontaktuj się z administratorem.',
+        'e_login' => 'Nie udało się zalogować. Skontaktuj się z administratorem.',
+        'e_unknown' => 'Wystąpił nieznany błąd. Skontaktuj się z administratorem.',
+        'e_exception' => 'Wystąpił błąd: ',
+        'e_wrong_credentials' => 'Niepoprawne dane logowania. Spróbuj jeszcze raz.'
     )
 ?>
