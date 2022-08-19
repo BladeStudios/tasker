@@ -33,6 +33,7 @@
         'task-list' => 'Task list',
         'title_addtask' => 'Add task',
         'label_name' => 'Task name',
-        'label_description' => 'Description'
+        'label_description' => 'Description',
+        'user_id_missing' => 'Cannot read user ID. Please log in again.'
     )
 ?>

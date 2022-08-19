@@ -33,6 +33,7 @@
         'task-list' => 'Lista zadań',
         'title_addtask' => 'Dodawanie zadania',
         'label_name' => 'Nazwa zadania',
-        'label_description' => 'Opis'
+        'label_description' => 'Opis',
+        'user_id_missing' => 'Nie można odczytać ID użytkownika. Zaloguj się ponownie.'
     )
 ?>

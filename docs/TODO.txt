@@ -18,10 +18,11 @@
     4.5. possibility of using all options of adding task
     4.6. option to assign a task to a friend
 5. task list view
-    5.1. simple view
+    5.1. [IN PROGRESS] simple view
     5.2. sorting
         5.2.1. by deadline
         5.2.2. by name
         5.2.3. by adding date
         5.2.4. by status
         5.2.5. by few factors (1-4)
+    5.3. On the top of page (under "Add task" button etc.) add a counter of number of total tasks "TODO", "IN PROGRESS" and "DONE"
