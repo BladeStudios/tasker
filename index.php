@@ -11,6 +11,7 @@
     <title>Index - Tasker (Powered by BladeStudios (C) 2022)</title>
     <link rel="stylesheet" href="libs/bootstrap-4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -39,7 +40,7 @@
             foreach($tasklist as $task)
             {
                 echo '
-                <div class="task">
+                <div class="task" data-user-id="'.$task['id'].'">
                     <div class="task-name-row">
                         <span class="task-name">taskname</span>
                         <span class="task-status">TODO</span>
@@ -48,22 +49,22 @@
                         description description description description description description description description description description description description description description description description description description description description
                     </div>
                     <div class="task-info-table-container">
-                    <table class="task-info-table">
-                        <tr>
-                            <td>Deadline</td>
-                            <td>Difficulty</td>
-                            <td>Time spent</td>
-                            <td>Value</td>
-                            <td>XP earned</td>
-                        </tr>
-                        <tr>
-                            <td class="task-deadline">t</td>
-                            <td class="task-difficulty">t</td>
-                            <td class="task-time-spent">t</td>
-                            <td class="task-value">t</td>
-                            <td class="task-xp-earned">t</td>
-                        </tr>
-                    </table>
+                        <table class="task-info-table">
+                            <tr>
+                                <td>Deadline</td>
+                                <td>Difficulty</td>
+                                <td>Time spent</td>
+                                <td>Value</td>
+                                <td>XP earned</td>
+                            </tr>
+                            <tr>
+                                <td class="task-deadline">t</td>
+                                <td class="task-difficulty">t</td>
+                                <td class="task-time-spent">t</td>
+                                <td class="task-value">t</td>
+                                <td class="task-xp-earned">t</td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="task-buttons">
                         <button class="btnTaskStart btn btn-success">START TASK</button>
