@@ -142,6 +142,37 @@ class Task
             return false;
         }
     }
+
+    public function getTaskListForUser($user_id)
+    {
+        require_once('database/Database.class.php');
+
+        try
+        {
+            $db_obj = new Database();
+            $conn = $db_obj->connect();
+
+            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id";
+
+            $st = $conn->prepare($sql);
+
+            $data = [
+                'user_id' => $user_id
+            ];
+
+            $st->execute($data);
+            $st->setFetchMode(PDO::FETCH_ASSOC);
+            $db_obj->disconnect();
+            return $st->fetchAll();
+        }
+        catch(PDOException $e)
+        {
+            require_once('src/Logger.class.php');
+            $logger = new Logger();
+            $logger->log('PDO Exception in User.class.php:getTaskDifficultyId(). Error info: '.$e->getMessage());
+            return false;
+        }
+    }
 }
 
 ?>
