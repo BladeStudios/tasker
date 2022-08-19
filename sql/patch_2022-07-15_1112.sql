@@ -80,7 +80,7 @@ CREATE TABLE tasker.task_difficulties (
 
 CREATE TABLE tasker.task_visibilities (
     id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'task visibility level ID',
-    description varchar(256) NOT NULL COMMENT 'description of visibility level'
+    name varchar(256) NOT NULL COMMENT 'description of visibility level'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE tasker.tasks (
@@ -135,7 +135,7 @@ INSERT INTO tasker.task_difficulties (id, name) VALUES (0, 'easy');
 INSERT INTO tasker.task_difficulties (id, name) VALUES (1, 'medium');
 INSERT INTO tasker.task_difficulties (id, name) VALUES (2, 'hard');
 
-INSERT INTO tasker.task_visibilities (id, description) VALUES (0, 'only task creator and task executor can see it');
-INSERT INTO tasker.task_visibilities (id, description) VALUES (1, "task creator, task executor and task executor's friends can see it");
-INSERT INTO tasker.task_visibilities (id, description) VALUES (2, "task creator, task executor, task creator's friends and task executor's friends can see it");
-INSERT INTO tasker.task_visibilities (id, description) VALUES (3, 'everyone can see it');
+INSERT INTO tasker.task_visibilities (id, name) VALUES (0, 'only task creator and task executor can see it');
+INSERT INTO tasker.task_visibilities (id, name) VALUES (1, "task creator, task executor and task executor's friends can see it");
+INSERT INTO tasker.task_visibilities (id, name) VALUES (2, "task creator, task executor, task creator's friends and task executor's friends can see it");
+INSERT INTO tasker.task_visibilities (id, name) VALUES (3, 'everyone can see it');
