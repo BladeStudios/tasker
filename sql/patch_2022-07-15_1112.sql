@@ -98,6 +98,7 @@ CREATE TABLE tasker.tasks (
     base_exp int(10) UNSIGNED NOT NULL COMMENT 'base number of experience points for finishing the task',
     time_exp int(10) UNSIGNED NOT NULL COMMENT 'number of experience points per minute of doing the task',
     visibility_id int(10) UNSIGNED NOT NULL COMMENT 'task visibility level for other users',
+    deadline DATETIME DEFAULT NULL COMMENT 'date when the task should be finished',
     PRIMARY KEY (id),
     FOREIGN KEY (creator_id) REFERENCES users(id),
     FOREIGN KEY (executor_id) REFERENCES users(id),
@@ -122,7 +123,7 @@ INSERT INTO tasker.friendship_statuses (id, name) VALUES (1, 'ACCEPTED');
 INSERT INTO tasker.friendship_statuses (id, name) VALUES (2, 'REJECTED');
 INSERT INTO tasker.friendship_statuses (id, name) VALUES (3, 'BLOCKED');
 
-INSERT INTO tasker.task_types (id, name) VALUES (0, 'wstawienie naczyń do zmywarki');
+INSERT INTO tasker.task_types (id, name) VALUES (0, 'none');
 
 INSERT INTO tasker.task_statuses (id, name) VALUES (0, 'TO DO');
 INSERT INTO tasker.task_statuses (id, name) VALUES (1, 'IN PROGRESS');
