@@ -1,0 +1,25 @@
+#TODO list
+
+1. timezones (saving all datetimes in UTC and converting to user's timezone)
+2. friendlist
+    2.1 sending friend invitation
+    2.2. view with friendlist and pending invitations
+    2.3 accepting an invitation
+    2.4 rejecting an invitation
+    2.5 blocking an user (doesn't let him invite you again)
+3. adding user' settings
+    3.1 timezone
+    3.2 blocking possibility of being invited by other users
+    3.3 setting up default task options
+4. adding tasks
+    4.4 labels
+    4.5 possibility of using all options of adding task
+    4.6 option to assign a task to a friend
+5. task list view
+    5.1 simple view
+    5.2 sorting
+        5.2.1 by deadline
+        5.2.2 by name
+        5.2.3 by adding date
+        5.2.4 by status
+        5.2.5 by few factors (1-4)
