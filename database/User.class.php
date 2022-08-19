@@ -135,7 +135,7 @@ class User
             $sql = "SELECT * FROM ".$this->tableName." WHERE login=:login";
 
             $st = $conn->prepare($sql);
-            //$st->bindParam('login',$login);
+
             $data = [
                 'login' => $login
             ];
@@ -151,7 +151,7 @@ class User
             $logger = new Logger();
             $logger->log('PDO Exception in User.class.php:getUserByLogin(). Error info: '.$e->getMessage());
             return -1;
-        }  
+        }
     }
 
     public function updateUser($id, $last_ip, $current_ip, $current_time, $user_os, $user_browser)
@@ -248,7 +248,7 @@ class User
             $sql = "SELECT * FROM ".$this->tableName." WHERE id=:id";
 
             $st = $conn->prepare($sql);
-            //$st->bindParam('login',$login);
+            
             $data = [
                 'id' => $id
             ];
