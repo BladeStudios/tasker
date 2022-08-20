@@ -27,6 +27,28 @@ class Database
     {
         $this->dbConn = null;
     }
+
+    public function getTable($table_name)
+    {
+        try
+        {
+            $conn = $this->connect();
+            $sql = "SELECT * FROM ".$table_name;
+
+            $st = $conn->prepare($sql);
+            $st->execute();
+            $st->setFetchMode(PDO::FETCH_ASSOC);
+            $this->disconnect();
+            return $st->fetchAll();
+        }
+        catch(PDOException $e)
+        {
+            require_once('src/Logger.class.php');
+            $logger = new Logger();
+            $logger->log('PDO Exception in Database.class.php:getTable(). Error info: '.$e->getMessage());
+            return false;
+        }
+    }
 }
 
 
