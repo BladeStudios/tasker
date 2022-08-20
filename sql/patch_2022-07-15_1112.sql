@@ -91,6 +91,7 @@ CREATE TABLE tasker.tasks (
     name varchar(32) NOT NULL COMMENT 'task name, like "washing the dishes"',
     description TEXT DEFAULT NULL COMMENT 'task description',
     time_spent int(10) UNSIGNED NOT NULL COMMENT 'number of seconds spent doing the task (max is around 136.01 years)',
+    created DATETIME DEFAULT NULL COMMENT 'date and time when the task was created',
     started DATETIME DEFAULT NULL COMMENT 'date and time when the user started or restarted doing the task',
     stopped DATETIME DEFAULT NULL COMMENT 'date and time when the user stopped doing the task (by finishing it or pausing it)',
     status_id int(10) UNSIGNED NOT NULL COMMENT 'status type ID',
@@ -109,13 +110,13 @@ CREATE TABLE tasker.tasks (
     FOREIGN KEY (visibility_id) REFERENCES task_visibilities(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO tasker.positions (id, name) VALUES (0, 'user');
-INSERT INTO tasker.positions (id, name) VALUES (1, 'moderator');
-INSERT INTO tasker.positions (id, name) VALUES (2, 'admin');
+INSERT INTO tasker.positions (id, name) VALUES (0, 'User');
+INSERT INTO tasker.positions (id, name) VALUES (1, 'Moderator');
+INSERT INTO tasker.positions (id, name) VALUES (2, 'Admin');
 
-INSERT INTO tasker.online_statuses (id, name) VALUES (0, 'offline');
-INSERT INTO tasker.online_statuses (id, name) VALUES (1, 'online');
-INSERT INTO tasker.online_statuses (id, name) VALUES (2, 'away');
+INSERT INTO tasker.online_statuses (id, name) VALUES (0, 'Offline');
+INSERT INTO tasker.online_statuses (id, name) VALUES (1, 'Online');
+INSERT INTO tasker.online_statuses (id, name) VALUES (2, 'Away');
 
 INSERT INTO tasker.timezones (name,country_code,utc_offset_std,utc_offset_dst,timezone_abbreviation_std,timezone_abbreviation_dst) VALUES ('UTC', '-',0,0,'UTC','UTC');
 
@@ -124,7 +125,7 @@ INSERT INTO tasker.friendship_statuses (id, name) VALUES (1, 'ACCEPTED');
 INSERT INTO tasker.friendship_statuses (id, name) VALUES (2, 'REJECTED');
 INSERT INTO tasker.friendship_statuses (id, name) VALUES (3, 'BLOCKED');
 
-INSERT INTO tasker.task_types (id, name) VALUES (0, 'none');
+INSERT INTO tasker.task_types (id, name) VALUES (0, 'None');
 
 INSERT INTO tasker.task_statuses (id, name) VALUES (0, 'TO DO');
 INSERT INTO tasker.task_statuses (id, name) VALUES (1, 'IN PROGRESS');
@@ -132,11 +133,11 @@ INSERT INTO tasker.task_statuses (id, name) VALUES (2, 'PAUSED');
 INSERT INTO tasker.task_statuses (id, name) VALUES (3, 'DONE');
 INSERT INTO tasker.task_statuses (id, name) VALUES (4, 'REMOVED');
 
-INSERT INTO tasker.task_difficulties (id, name) VALUES (0, 'easy');
-INSERT INTO tasker.task_difficulties (id, name) VALUES (1, 'medium');
-INSERT INTO tasker.task_difficulties (id, name) VALUES (2, 'hard');
+INSERT INTO tasker.task_difficulties (id, name) VALUES (0, 'Easy');
+INSERT INTO tasker.task_difficulties (id, name) VALUES (1, 'Medium');
+INSERT INTO tasker.task_difficulties (id, name) VALUES (2, 'Hard');
 
-INSERT INTO tasker.task_visibilities (id, name) VALUES (0, 'only task creator and task executor can see it');
-INSERT INTO tasker.task_visibilities (id, name) VALUES (1, "task creator, task executor and task executor's friends can see it");
-INSERT INTO tasker.task_visibilities (id, name) VALUES (2, "task creator, task executor, task creator's friends and task executor's friends can see it");
-INSERT INTO tasker.task_visibilities (id, name) VALUES (3, 'everyone can see it');
+INSERT INTO tasker.task_visibilities (id, name) VALUES (0, 'Only task creator and task executor can see it');
+INSERT INTO tasker.task_visibilities (id, name) VALUES (1, "Task creator, task executor and task executor's friends can see it");
+INSERT INTO tasker.task_visibilities (id, name) VALUES (2, "Task creator, task executor, task creator's friends and task executor's friends can see it");
+INSERT INTO tasker.task_visibilities (id, name) VALUES (3, 'Everyone can see it');
