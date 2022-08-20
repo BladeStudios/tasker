@@ -13,10 +13,14 @@ class Task
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "INSERT INTO ".$this->tableName." (creator_id, executor_id, type_id, name, description, time_spent, started, stopped, status_id, difficulty_id, base_exp, time_exp, visibility_id, deadline)
-            VALUES (:creator_id, :executor_id, :type_id, :name, :description, 0, null, null, 0, :difficulty_id, :base_exp, :time_exp, :visibility_id, :deadline)";
+            $sql = "INSERT INTO ".$this->tableName." (creator_id, executor_id, type_id, name, description, created, time_spent, started, stopped, status_id, difficulty_id, base_exp, time_exp, visibility_id, deadline)
+            VALUES (:creator_id, :executor_id, :type_id, :name, :description, :created, 0, null, null, 0, :difficulty_id, :base_exp, :time_exp, :visibility_id, :deadline)";
 
             $st = $conn->prepare($sql);
+
+            require_once('src/Info.class.php');
+            $info = new Info();
+            $created = $info->getTime();
 
             $data = [
                 'creator_id' => $creator_id,
@@ -24,6 +28,7 @@ class Task
                 'type_id' => $type_id,
                 'name' => $name,
                 'description' => $description,
+                'created' => $created,
                 'difficulty_id' => $difficulty_id,
                 'base_exp' => $base_exp,
                 'time_exp' => $time_exp,
