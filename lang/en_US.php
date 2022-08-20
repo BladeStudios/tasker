@@ -34,6 +34,8 @@
         'title_addtask' => 'Add task',
         'label_name' => 'Task name',
         'label_description' => 'Description',
-        'user_id_missing' => 'Cannot read user ID. Please log in again.'
+        'user_id_missing' => 'Cannot read user ID. Please log in again.',
+        'e_database' => 'Error retrieving data from the database.',
+        'e_account_permissions' => 'You don\'t have permissions for this account. Please log in again.'
     )
 ?>

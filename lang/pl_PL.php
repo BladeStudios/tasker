@@ -34,6 +34,8 @@
         'title_addtask' => 'Dodawanie zadania',
         'label_name' => 'Nazwa zadania',
         'label_description' => 'Opis',
-        'user_id_missing' => 'Nie można odczytać ID użytkownika. Zaloguj się ponownie.'
+        'user_id_missing' => 'Nie można odczytać ID użytkownika. Zaloguj się ponownie.',
+        'e_database' => 'Wystąpił błąd podczas pobierania danych z bazy danych.',
+        'e_account_permissions' => 'Nie masz uprawnień do tego konta. Zaloguj się ponownie.'
     )
 ?>
