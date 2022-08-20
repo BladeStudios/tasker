@@ -49,6 +49,34 @@ class Database
             return false;
         }
     }
+
+    public function doesUserExist($user_id)
+    {
+        try
+        {
+            $conn = $this->connect();
+            $sql = "SELECT * FROM users WHERE id = :user_id";
+
+            $st = $conn->prepare($sql);
+
+            $data = ['user_id' => $user_id];
+
+            $st->execute($data);
+            $st->setFetchMode(PDO::FETCH_ASSOC);
+            $this->disconnect();
+            $result = $st->fetchAll();
+            if(count($result)===1 && $result[0]['id']===$user_id)
+                return true;
+            else return false;
+        }
+        catch(PDOException $e)
+        {
+            require_once('src/Logger.class.php');
+            $logger = new Logger();
+            $logger->log('PDO Exception in Database.class.php:doesUserExist(). Error info: '.$e->getMessage());
+            return false;
+        }
+    }
 }
 
 
