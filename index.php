@@ -91,7 +91,7 @@
                 switch($taskInfo['task_difficulties'][$task['difficulty_id']])
                 {
                     case 'Easy': $difficultyColor = 'green'; break;
-                    case 'Medium': $difficultyColor = 'yellow'; break;
+                    case 'Medium': $difficultyColor = 'orange'; break;
                     case 'Hard': $difficultyColor = 'red'; break;
                     default: $difficultyColor = 'black';
                 }
