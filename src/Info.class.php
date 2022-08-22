@@ -69,7 +69,14 @@ class Info
 
     public function getTime()
     {
-        return date("Y-m-d H:i:s");
+        return gmdate("Y-m-d H:i:s");
+    }
+
+    public function convertTimeForTimezone($time, $timezone)
+    {
+        $dateTime = new DateTime($time, new DateTimeZone('UTC'));
+        $dateTime->setTimezone(new DateTimeZone($timezone));
+        return $dateTime->format("Y-m-d H:i:s");
     }
 
     public function getTimestamp()
