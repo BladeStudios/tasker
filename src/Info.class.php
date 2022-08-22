@@ -210,6 +210,19 @@ class Info
 
         return $descriptions;
     }
+
+    public function getExpPerMin()
+    {
+        $exp_per_min_levels = [ 3, 6, 12 ];
+        return $exp_per_min_levels;
+    }
+
+    public function getMinimumExp()
+    {
+        $minimum_exp = [ 10, 20, 40 ];
+        return $minimum_exp;
+    }
+
 }
 
 ?>

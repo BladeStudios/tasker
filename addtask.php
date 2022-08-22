@@ -35,7 +35,7 @@
     {
         require_once('database/Task.class.php');
         $task = new Task();
-        $task->addTask($_SESSION['id'], $_SESSION['id'],0,$_POST['name'],$_POST['description'],$_POST['difficulty'],$_POST['base_exp'],$_POST['time_exp'],$_POST['visibility'],null);
+        $task->addTask($_SESSION['id'], $_SESSION['id'],0,$_POST['name'],$_POST['description'],$_POST['difficulty'],$_POST['visibility'],null);
     }
 
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']===true)
@@ -51,11 +51,7 @@
             <option value="0">Easy</option>
             <option value="1">Medium</option>
             <option value="2">Hard</option>
-        </select><br><br>'.
-        $lang['label1'].'<br>
-        <input type="number" min="0" max="10000" name="base_exp"/><br><br>'.
-        $lang['label1'].'<br>
-        <input type="number" min="0" max="10" name="time_exp"/><br><br>
+        </select><br><br>
         <input type="hidden" value="3" name="visibility"/><br><br>
         <input type="submit" class="btn btn-success center-in-div" value="'.$lang['add-task'].'"/>
         </form>';
