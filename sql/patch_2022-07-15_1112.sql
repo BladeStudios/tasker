@@ -1,26 +1,5 @@
 CREATE DATABASE IF NOT EXISTS tasker CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE tasker.positions (
-    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'position in the community; number refers to position name, ex. Admin, Operator, Moderator, User etc.',
-    name varchar(32) NOT NULL COMMENT 'position name, like: Admin, Operator, Moderator, User etc.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE tasker.online_statuses (
-    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'online status ID',
-    name varchar(32) NOT NULL COMMENT 'status name, like: online, offline, AFK etc.'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE tasker.timezones (
-    id int(10) UNSIGNED AUTO_INCREMENT COMMENT 'timezone ID',
-    name varchar(100) NOT NULL COMMENT 'timezone name, for example Europe/London',
-    country_code varchar(2) DEFAULT NULL COMMENT 'country code, for example PL for Europe/Warsaw',
-    utc_offset_std int(11) DEFAULT 0 COMMENT 'offset in minutes from UTC standard time, like -120 for UTC-2:00',
-    utc_offset_dst int(11) DEFAULT 0 COMMENT 'offset in minutes from UTC daylight saving time, like -120 for UTC-2:00',
-    timezone_abbreviation_std varchar(5) NOT NULL COMMENT 'time zone abbreviation for standard time, like GMT',
-    timezone_abbreviation_dst varchar(5) NOT NULL COMMENT 'time zone abbreviation for daylight saving time, like GMT',
-    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 CREATE TABLE tasker.users (
     id int(10) UNSIGNED AUTO_INCREMENT COMMENT 'unique ID of each user entry',
     login varchar(32) DEFAULT NULL COMMENT 'login/username/nickname',
@@ -40,16 +19,8 @@ CREATE TABLE tasker.users (
     banned_until DATETIME DEFAULT NULL COMMENT 'date and time when the account will be unbanned',
     level int(10) UNSIGNED NOT NULL COMMENT 'current account level (depends on experience points)',
     experience BIGINT(20) UNSIGNED NOT NULL COMMENT 'current number of experience points for doing tasks',
-    timezone_id int(10) UNSIGNED DEFAULT NULL COMMENT 'timezone ID',
-    PRIMARY KEY (id),
-    FOREIGN KEY (position_id) REFERENCES positions(id),
-    FOREIGN KEY (status_id) REFERENCES online_statuses(id),
-    FOREIGN KEY (timezone_id) REFERENCES timezones(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE tasker.friendship_statuses (
-    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'friendship status ID',
-    name varchar(32) NOT NULL COMMENT 'status name, like: PENDING, ACCEPTED, REJECTED, BLOCKED etc.'
+    timezone varchar(100) DEFAULT NULL COMMENT 'timezone name',
+    PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE tasker.friendships (
@@ -59,28 +30,7 @@ CREATE TABLE tasker.friendships (
     status_id int(10) UNSIGNED NOT NULL COMMENT 'friendship status ID',
     PRIMARY KEY (id),
     FOREIGN KEY (inviter_id) REFERENCES users(id),
-    FOREIGN KEY (invitee_id) REFERENCES users(id),
-    FOREIGN KEY (status_id) REFERENCES friendship_statuses(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE tasker.task_types (
-    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'task type ID',
-    name varchar(32) NOT NULL COMMENT 'task type name, like "washing the dishes"'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE tasker.task_statuses (
-    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'task status ID',
-    name varchar(32) NOT NULL COMMENT 'task status name, like TODO, IN PROGRESS, PAUSED, DONE, REMOVED'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE tasker.task_difficulties (
-    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'task difficulty level ID',
-    name varchar(32) NOT NULL COMMENT 'task difficulty name, like EASY, MEDIUM, HARD'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE tasker.task_visibilities (
-    id int(10) UNSIGNED DEFAULT NULL UNIQUE COMMENT 'task visibility level ID',
-    name varchar(256) NOT NULL COMMENT 'description of visibility level'
+    FOREIGN KEY (invitee_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE tasker.tasks (
@@ -103,41 +53,5 @@ CREATE TABLE tasker.tasks (
     deadline DATETIME DEFAULT NULL COMMENT 'date when the task should be finished',
     PRIMARY KEY (id),
     FOREIGN KEY (creator_id) REFERENCES users(id),
-    FOREIGN KEY (executor_id) REFERENCES users(id),
-    FOREIGN KEY (type_id) REFERENCES task_types(id),
-    FOREIGN KEY (status_id) REFERENCES task_statuses(id),
-    FOREIGN KEY (difficulty_id) REFERENCES task_difficulties(id),
-    FOREIGN KEY (visibility_id) REFERENCES task_visibilities(id)
+    FOREIGN KEY (executor_id) REFERENCES users(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO tasker.positions (id, name) VALUES (0, 'User');
-INSERT INTO tasker.positions (id, name) VALUES (1, 'Moderator');
-INSERT INTO tasker.positions (id, name) VALUES (2, 'Admin');
-
-INSERT INTO tasker.online_statuses (id, name) VALUES (0, 'Offline');
-INSERT INTO tasker.online_statuses (id, name) VALUES (1, 'Online');
-INSERT INTO tasker.online_statuses (id, name) VALUES (2, 'Away');
-
-INSERT INTO tasker.timezones (name,country_code,utc_offset_std,utc_offset_dst,timezone_abbreviation_std,timezone_abbreviation_dst) VALUES ('UTC', '-',0,0,'UTC','UTC');
-
-INSERT INTO tasker.friendship_statuses (id, name) VALUES (0, 'PENDING');
-INSERT INTO tasker.friendship_statuses (id, name) VALUES (1, 'ACCEPTED');
-INSERT INTO tasker.friendship_statuses (id, name) VALUES (2, 'REJECTED');
-INSERT INTO tasker.friendship_statuses (id, name) VALUES (3, 'BLOCKED');
-
-INSERT INTO tasker.task_types (id, name) VALUES (0, 'None');
-
-INSERT INTO tasker.task_statuses (id, name) VALUES (0, 'TO DO');
-INSERT INTO tasker.task_statuses (id, name) VALUES (1, 'IN PROGRESS');
-INSERT INTO tasker.task_statuses (id, name) VALUES (2, 'PAUSED');
-INSERT INTO tasker.task_statuses (id, name) VALUES (3, 'DONE');
-INSERT INTO tasker.task_statuses (id, name) VALUES (4, 'REMOVED');
-
-INSERT INTO tasker.task_difficulties (id, name) VALUES (0, 'Easy');
-INSERT INTO tasker.task_difficulties (id, name) VALUES (1, 'Medium');
-INSERT INTO tasker.task_difficulties (id, name) VALUES (2, 'Hard');
-
-INSERT INTO tasker.task_visibilities (id, name) VALUES (0, 'Only task creator and task executor can see it');
-INSERT INTO tasker.task_visibilities (id, name) VALUES (1, "Task creator, task executor and task executor's friends can see it");
-INSERT INTO tasker.task_visibilities (id, name) VALUES (2, "Task creator, task executor, task creator's friends and task executor's friends can see it");
-INSERT INTO tasker.task_visibilities (id, name) VALUES (3, 'Everyone can see it');

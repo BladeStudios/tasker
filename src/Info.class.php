@@ -113,6 +113,103 @@ class Info
         $languageArray = explode(",",$_SERVER['HTTP_ACCEPT_LANGUAGE']);
         return $languageArray[0];
     }
+
+    public function getPositions()
+    {
+        $positions = [
+            0 => 'User',
+            1 => 'Moderator',
+            2 => 'Admin'
+        ];
+
+        return $positions;
+    }
+
+    public function getOnlineStatuses()
+    {
+        $statuses = [
+            0 => 'Offline',
+            1 => 'Online',
+            2 => 'Away'
+        ];
+
+        return $statuses;
+    }
+
+    public function getFriendshipStatuses()
+    {
+        $statuses = [
+            0 => 'PENDING',
+            1 => 'ACCEPTED',
+            2 => 'REJECTED',
+            3 => 'BLOCKED'
+        ];
+
+        return $statuses;
+    }
+
+    public function getTaskTypes()
+    {
+        $task_types = [
+            0 => 'None'
+        ];
+
+        return $task_types;
+    }
+
+    public function getTaskStatuses()
+    {
+        $statuses = [
+            0 => 'TO DO',
+            1 => 'IN PROGRESS',
+            2 => 'PAUSED',
+            3 => 'DONE',
+            4 => 'REMOVED'
+        ];
+
+        return $statuses;
+    }
+
+    public function getTaskDifficulties()
+    {
+        $difficulties = [
+            0 => 'Easy',
+            1 => 'Medium',
+            2 => 'Hard'
+        ];
+
+        return $difficulties;
+    }
+
+    public function getTaskVisibilities()
+    {
+        $visibilities = [
+            0 => 'Only task creator and task executor can see it',
+            1 => "Task creator, task executor and task executor's friends can see it",
+            2 => "Task creator, task executor, task creator's friends and task executor's friends can see it",
+            3 => 'Everyone can see it'
+        ];
+
+        return $visibilities;
+    }
+
+    public function getTimezoneDescriptions()
+    {
+        $descriptions = [
+            'Etc/GMT+12' => '(UTC -12:00) International Date Line - West',
+            'Pacific/Pago_Pago' => '(UTC -11:00) Pacific/Pago Pago',
+            'America/Adak' => '(UTC -10:00) America/Adak',
+            'Pacific/Honolulu' => '(UTC -10:00) Pacific/Honolulu',
+            'Pacific/Marquesas' => '(UTC -09:30) Pacific/Marquesas',
+            'America/Anchorage' => '(UTC -09:00) America/Anchorage',
+            'Pacific/Gambier' => '(UTC -09:00) Pacific/Gambier',
+            'Europe/London' => '(UTC +00:00) Europe/London',
+            'Europe/Paris' => '(UTC +01:00) Europe/Paris',
+            'Europe/Warsaw' => '(UTC +01:00) Europe/Warsaw'
+        ];
+
+        return $descriptions;
+    }
 }
 
 ?>

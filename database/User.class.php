@@ -15,9 +15,9 @@ class User
 
             $sql = "INSERT INTO ".$this->tableName."
             (login, password, salt, email, position_id, status_id, last_ip, current_ip, online_from, total_online_time, last_activity, browser, system, create_time,
-            banned_until, level, experience, timezone_id)
+            banned_until, level, experience, timezone)
             VALUES (:login, :password, :salt, :email, :position_id, :status_id, :last_ip, :current_ip, :online_from, :total_online_time, :last_activity, :browser, :system, :create_time,
-            :banned_until, :level, :experience, :timezone_id)";
+            :banned_until, :level, :experience, :timezone)";
 
             $st = $conn->prepare($sql);
             $st->bindParam('login',$login);
@@ -37,7 +37,7 @@ class User
             $st->bindParam('banned_until',$banned_until);
             $st->bindParam('level',$level);
             $st->bindParam('experience',$experience);
-            $st->bindParam('timezone_id',$timezone_id);
+            $st->bindParam('timezone',$timezone);
 
             $salt = null;
             $position_id = 0;
@@ -51,7 +51,7 @@ class User
             $banned_until = null;
             $level = 1;
             $experience = 0;
-            $timezone_id = 1;
+            $timezone = 'Europe/Paris';
 
             $st->execute();
             $db_obj->disconnect();

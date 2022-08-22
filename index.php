@@ -45,33 +45,10 @@
 
             $ok = true; //flag to check if all data from the database was received successfully
 
-            require_once('database/User.class.php');
-            $user_obj = new User();
-
             require_once('database/Task.class.php');
             $task_obj = new Task();
             $taskList = $task_obj->getTaskListForUser($_SESSION['id']);
             if($taskList===false) $ok = false;
-
-            $tableNames = array(
-                'task_difficulties',
-                'task_statuses',
-                'task_types',
-                'task_visibilities'
-            );
-
-            $taskInfo = array();
-
-            foreach($tableNames as $tableName)
-            {
-                $taskInfo[$tableName] = array();
-                $data = $database->getTable($tableName);
-                if(!$data) $ok = false;
-                foreach($data as $val)
-                {
-                    $taskInfo[$tableName][$val['id']] = $val['name'];
-                }
-            }
 
             if(!$ok)
             {
@@ -83,6 +60,19 @@
                 }
                 exit;
             }
+
+            require_once('src/Info.class.php');
+            $info = new Info();
+
+            $taskInfo = [
+                'task_difficulties' => $info->getTaskDifficulties(),
+                'task_statuses' => $info->getTaskStatuses(),
+                'task_types' => $info->getTaskTypes(),
+                'task_visibilities' => $info->getTaskVisibilities()
+            ];
+
+            require_once('database/User.class.php');
+            $user_obj = new User();
 
             foreach($taskList as $task)
             {
@@ -133,7 +123,7 @@
                     </div>
                 </div>
                 <div class="task-more-details">
-                    <div class="task-details-added">Added: '.$task['created'].'</div>
+                    <div class="task-details-added">Added: '.$info->convertTimeForTimezone($task['created'],'Europe/Paris').'</div>
                     <div class="task-details-created-by">Created by: '.$createdBy.'</div>
                     <div class="task-details-assigned-to">Assigned to: '.$_SESSION['login'].'</div>
                     <div class="task-details-visibility">Visibility: '.$taskInfo['task_visibilities'][$task['visibility_id']].'</div>
