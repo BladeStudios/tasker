@@ -94,15 +94,17 @@
                 {
                     $startDisabled = ' disabled';
                     $pauseDisabled = '';
+                    $timeSpent = $task['time_spent'] + (strtotime($info->getTime()) - strtotime($task['started']));
                 }
                 else
                 {
                     $startDisabled = '';
                     $pauseDisabled = ' disabled';
+                    $timeSpent = $task['time_spent'];
                 }
 
                 echo '
-                <div class="task" data-task-id="'.$task['id'].'" data-task-difficulty-id="'.$task['difficulty_id'].'">
+                <div class="task" data-task-id="'.$task['id'].'" data-task-difficulty-id="'.$task['difficulty_id'].'" data-time-spent="'.$timeSpent.'" data-exp-per-min="'.$info->getExpPerMin()[$task['difficulty_id']].'">
                     <div class="task-name-row">
                         <span class="task-name">'.$task['name'].'</span>
                         <span class="task-status">'.$taskInfo['task_statuses'][$task['status_id']].'</span>
@@ -164,6 +166,7 @@
 <script type="text/javascript">
     clocks = [];
     $(document).ready(function(){
+        enableTimers();
         $('.btnTaskStart').click(function(){
             taskElement = $(this).parent().parent();
             taskId = taskElement.data('task-id');
@@ -188,6 +191,20 @@
             toggleTask(taskId, 'pause', timeSpentElement);
         });
 
+        function enableTimers()
+        {
+            elements = $('.btnTaskStart:disabled').parent().parent();
+            elements.each(function(){
+                taskId = $(this).data('task-id');
+                timeSpent = $(this).data('time-spent');
+                difficultyId = $(this).data('task-difficulty-id');
+                expPerMin = $(this).data('exp-per-min');
+                interval = 60/expPerMin; //every interval seconds user gets 1 xp
+                expEarned = Math.floor(timeSpent/interval)
+                startClock(taskId, timeSpent, expEarned, expPerMin);
+            });
+        }
+
         function toggleTask(taskId, option, clockElement)
         {
             $.ajax('ajax.php', {
@@ -211,7 +228,6 @@
 
         function startClock(taskId, starting_seconds, exp_earned, exp_per_min)
         {
-            console.log('clock started');
             if(!(clocks[taskId] && clocks[taskId].length)) clocks[taskId] = [];
 
             clocks[taskId][0] = starting_seconds;
@@ -227,7 +243,6 @@
 
         function stopClock(taskId)
         {
-            console.log('clock stopped');
             clearInterval(clocks[taskId][3]);
         }
 
