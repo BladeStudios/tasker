@@ -36,6 +36,12 @@
         'label_description' => 'Opis',
         'user_id_missing' => 'Nie można odczytać ID użytkownika. Zaloguj się ponownie.',
         'e_database' => 'Wystąpił błąd podczas pobierania danych z bazy danych.',
-        'e_account_permissions' => 'Nie masz uprawnień do tego konta. Zaloguj się ponownie.'
+        'e_account_permissions' => 'Nie masz uprawnień do tego konta. Zaloguj się ponownie.',
+        'addtask_name' => 'Nazwa zadania',
+        'addtask_description' => 'Opis',
+        'addtask_difficulty' => 'Poziom trudności',
+        'addtask_easy' => 'Łatwy',
+        'addtask_medium' => 'Średni',
+        'addtask_hard' => 'Trudny'
     )
 ?>

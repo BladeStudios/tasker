@@ -42,15 +42,15 @@
     {
         echo '<div id="addtaskform">
         <form method="post">'.
-        $lang['label1'].'<br>
+        $lang['addtask_name'].'<br>
         <input type="text" name="name"/><br><br>'.
-        $lang['label1'].'<br>
+        $lang['addtask_description'].'<br>
         <textarea name="description" rows="5" cols="100"></textarea><br><br>'.
-        $lang['label1'].'<br>
+        $lang['addtask_difficulty'].'<br>
         <select name="difficulty">
-            <option value="0">Easy</option>
-            <option value="1">Medium</option>
-            <option value="2">Hard</option>
+            <option value="0">'.$lang['addtask_easy'].'</option>
+            <option value="1">'.$lang['addtask_medium'].'</option>
+            <option value="2">'.$lang['addtask_hard'].'</option>
         </select><br><br>
         <input type="hidden" value="3" name="visibility"/><br><br>
         <input type="submit" class="btn btn-success center-in-div" value="'.$lang['add-task'].'"/>

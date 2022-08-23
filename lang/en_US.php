@@ -36,6 +36,12 @@
         'label_description' => 'Description',
         'user_id_missing' => 'Cannot read user ID. Please log in again.',
         'e_database' => 'Error retrieving data from the database.',
-        'e_account_permissions' => 'You don\'t have permissions for this account. Please log in again.'
+        'e_account_permissions' => 'You don\'t have permissions for this account. Please log in again.',
+        'addtask_name' => 'Task name',
+        'addtask_description' => 'Description',
+        'addtask_difficulty' => 'Difficulty',
+        'addtask_easy' => 'Easy',
+        'addtask_medium' => 'Medium',
+        'addtask_hard' => 'Hard'
     )
 ?>
