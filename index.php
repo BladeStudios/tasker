@@ -68,7 +68,9 @@
                 'task_difficulties' => $info->getTaskDifficulties(),
                 'task_statuses' => $info->getTaskStatuses(),
                 'task_types' => $info->getTaskTypes(),
-                'task_visibilities' => $info->getTaskVisibilities()
+                'task_visibilities' => $info->getTaskVisibilities(),
+                'task_exp_per_min' => $info->getExpPerMin(),
+                'task_minimum_exp' => $info->getMinimumExp()
             ];
 
             require_once('database/User.class.php');
@@ -88,8 +90,19 @@
 
                 if(empty($task['deadline'])) $task['deadline'] = 'none';
 
+                if($info->isTaskRunning($task['started'],$task['stopped']))
+                {
+                    $startDisabled = ' disabled';
+                    $pauseDisabled = '';
+                }
+                else
+                {
+                    $startDisabled = '';
+                    $pauseDisabled = ' disabled';
+                }
+
                 echo '
-                <div class="task" data-user-id="'.$task['id'].'">
+                <div class="task" data-task-id="'.$task['id'].'" data-task-difficulty-id="'.$task['difficulty_id'].'">
                     <div class="task-name-row">
                         <span class="task-name">'.$task['name'].'</span>
                         <span class="task-status">'.$taskInfo['task_statuses'][$task['status_id']].'</span>
@@ -107,15 +120,15 @@
                             <tr>
                                 <td class="task-deadline">'.$task['deadline'].'</td>
                                 <td class="task-difficulty" style="font-weight: bold; color: '.$difficultyColor.'">'.$taskInfo['task_difficulties'][$task['difficulty_id']].'</td>
-                                <td class="task-time-spent">'.$task['time_spent'].'</td>
-                                <td class="task-value">'.$task['time_exp'].' XP/min</td>
+                                <td class="task-time-spent">'.$info->convertSecondsToTime($task['time_spent']).'</td>
+                                <td class="task-value">'.$taskInfo['task_exp_per_min'][$task['difficulty_id']].' XP/min</td>
                                 <td class="task-xp-earned">'.$task['total_exp'].'</td>
                             </tr>
                         </table>
                     </div>
                     <div class="task-buttons">
-                        <button class="btnTaskStart btn btn-success">START TASK</button>
-                        <button class="btnTaskPause btn btn-warning">PAUSE</button>
+                        <button class="btnTaskStart btn btn-success"'.$startDisabled.'>START TASK</button>
+                        <button class="btnTaskPause btn btn-warning"'.$pauseDisabled.'>PAUSE</button>
                         <button class="btnTaskFinish btn btn-danger">FINISH TASK</button>
                     </div>
                     <div class="task-more-details-row">
@@ -127,7 +140,7 @@
                     <div class="task-details-created-by">Created by: '.$createdBy.'</div>
                     <div class="task-details-assigned-to">Assigned to: '.$_SESSION['login'].'</div>
                     <div class="task-details-visibility">Visibility: '.$taskInfo['task_visibilities'][$task['visibility_id']].'</div>
-                    <div class="task-details-minimum-xp">Minimum XP for this task: '.$task['base_exp'].'</div>
+                    <div class="task-details-minimum-xp">Minimum XP for this task: '.$taskInfo['task_minimum_exp'][$task['difficulty_id']].'</div>
                 </div>
                 ';
             }
@@ -149,12 +162,100 @@
 <?php require('footer.php'); ?>
 
 <script type="text/javascript">
+    clocks = [];
     $(document).ready(function(){
         $('.btnTaskStart').click(function(){
             taskElement = $(this).parent().parent();
-            taskId = taskElement.data('user-id');
-            alert('task id=' + taskElement.data('user-id'));
-        })
+            taskId = taskElement.data('task-id');
+            $(this).prop('disabled',true);
+
+            pauseButton = $(this).parent().children('.btnTaskPause');
+            pauseButton.prop('disabled',false);
+
+            timeSpentElement = taskElement.find('.task-time-spent');
+            toggleTask(taskId, 'start', timeSpentElement);
+        });
+
+        $('.btnTaskPause').click(function(){
+            taskElement = $(this).parent().parent();
+            taskId = taskElement.data('task-id');
+            $(this).prop('disabled',true);
+
+            startButton = $(this).parent().children('.btnTaskStart');
+            startButton.prop('disabled',false);
+
+            timeSpentElement = taskElement.find('.task-time-spent');
+            toggleTask(taskId, 'pause', timeSpentElement);
+        });
+
+        function toggleTask(taskId, option, clockElement)
+        {
+            $.ajax('ajax.php', {
+                type: 'POST',
+                data: {id: taskId, fun: option},
+                success: function(data, status, xhr){
+                    toggleClock(taskId, option, data, clockElement);
+                }
+            });
+        }
+
+        function toggleClock(taskId, option, data, clockElement)
+        {
+            data = JSON.parse(data);
+            switch(data.status)
+            {
+                case 'started': startClock(taskId, data.time_spent, data.exp_earned, data.exp_per_min); break;
+                case 'paused': stopClock(taskId); break;
+            }
+        }
+
+        function startClock(taskId, starting_seconds, exp_earned, exp_per_min)
+        {
+            console.log('clock started');
+            if(!(clocks[taskId] && clocks[taskId].length)) clocks[taskId] = [];
+
+            clocks[taskId][0] = starting_seconds;
+            clocks[taskId][1] = exp_earned;
+            clocks[taskId][2] = exp_per_min;
+
+            updateTimer(taskId, clocks[taskId][0]);
+
+            clocks[taskId][3] = setInterval(function(){
+                updateTimer(taskId);
+            }, 1000);
+        }
+
+        function stopClock(taskId)
+        {
+            console.log('clock stopped');
+            clearInterval(clocks[taskId][3]);
+        }
+
+        function updateTimer(taskId)
+        {
+            clocks[taskId][0] += 1;
+            clocks[taskId][1] += (clocks[taskId][2] / 60)
+            console.log('updated');
+
+            timerElement = $('.task[data-task-id="'+taskId+'"').find('.task-time-spent');
+            timerElement.text(toHHMMSS(clocks[taskId][0]));
+
+            expEarnedElement = $('.task[data-task-id="'+taskId+'"').find('.task-xp-earned');
+            expEarnedElement.text(Math.floor(clocks[taskId][1]));
+        }
+
+        function toHHMMSS(number_of_seconds)
+        {
+            var sec_num = parseInt(number_of_seconds, 10);
+            var hours   = Math.floor(sec_num / 3600);
+            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+            var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+            if (hours   < 10) {hours   = "0"+hours;}
+            if (minutes < 10) {minutes = "0"+minutes;}
+            if (seconds < 10) {seconds = "0"+seconds;}
+            return hours+':'+minutes+':'+seconds;
+        }
     });
 </script>
 

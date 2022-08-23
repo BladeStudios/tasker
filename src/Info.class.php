@@ -223,6 +223,28 @@ class Info
         return $minimum_exp;
     }
 
+    public function isTaskRunning($start_date, $stop_date)
+    {
+        if($start_date===null)
+            return false;
+        else if($stop_date===null)
+            return true;
+        else if($stop_date > $start_date)
+            return false;
+        else
+            return true;
+    }
+
+    public function convertSecondsToTime($seconds)
+    {
+        $hours = floor($seconds / 3600);
+        $mins = floor($seconds / 60 % 60);
+        $secs = floor($seconds % 60);
+
+        $result = sprintf('%02d:%02d:%02d', $hours, $mins, $secs);
+        return $result;
+    }
+
 }
 
 ?>
