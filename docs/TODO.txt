@@ -26,4 +26,4 @@
         5.2.4. by status
         5.2.5. by few factors (1-4)
     5.3. On the top of page (under "Add task" button etc.) add a counter of number of total tasks "TODO", "IN PROGRESS" and "DONE"
-    [IN PROGRESS] 5.4 task timers working properly even after refreshing the table
+    [DONE] 5.4 task timers working properly with started tasks even after refreshing the page
