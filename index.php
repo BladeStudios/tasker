@@ -194,12 +194,12 @@
                 type: 'POST',
                 data: {id: taskId, fun: option},
                 success: function(data, status, xhr){
-                    toggleClock(taskId, option, data, clockElement);
+                    toggleClock(taskId, data);
                 }
             });
         }
 
-        function toggleClock(taskId, option, data, clockElement)
+        function toggleClock(taskId, data)
         {
             data = JSON.parse(data);
             switch(data.status)
