@@ -234,8 +234,10 @@
         function updateTimer(taskId)
         {
             clocks[taskId][0] += 1;
-            clocks[taskId][1] += (clocks[taskId][2] / 60)
-            console.log('updated');
+            if((clocks[taskId][0] % 20 == 0 && clocks[taskId][2] == 3) ||
+            (clocks[taskId][0] % 10 == 0 && clocks[taskId][2] == 6) ||
+            (clocks[taskId][0] % 5 == 0 && clocks[taskId][2] == 12))
+                clocks[taskId][1] += 1;
 
             timerElement = $('.task[data-task-id="'+taskId+'"').find('.task-time-spent');
             timerElement.text(toHHMMSS(clocks[taskId][0]));
