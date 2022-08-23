@@ -31,14 +31,14 @@
 
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']===true)
     {
-        if(isset($_SESSION['id']))
+        if(isset($_SESSION['user']['id']))
         {
             require_once('database/Database.class.php');
             $database = new Database();
-            if(!$database->doesUserExist($_SESSION['id']))
+            if(!$database->doesUserExist($_SESSION['user']['id']))
             {
                 unset($_SESSION['loggedin']);
-                unset($_SESSION['id']);
+                unset($_SESSION['user']);
                 $_SESSION['error'] = $lang['e_account_permissions'];
                 exit(header('Location: login.php'));
             }
@@ -47,7 +47,7 @@
 
             require_once('database/Task.class.php');
             $task_obj = new Task();
-            $taskList = $task_obj->getTaskListForUser($_SESSION['id']);
+            $taskList = $task_obj->getTaskListForUser($_SESSION['user']['id']);
             if($taskList===false) $ok = false;
 
             if(!$ok)

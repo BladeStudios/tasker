@@ -35,7 +35,7 @@
     {
         require_once('database/Task.class.php');
         $task = new Task();
-        $task->addTask($_SESSION['id'], $_SESSION['id'],0,$_POST['name'],$_POST['description'],$_POST['difficulty'],$_POST['visibility'],null);
+        $task->addTask($_SESSION['user']['id'], $_SESSION['user']['id'],0,$_POST['name'],$_POST['description'],$_POST['difficulty'],$_POST['visibility'],null);
     }
 
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']===true)

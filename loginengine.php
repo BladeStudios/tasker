@@ -38,8 +38,7 @@
                 if(password_verify($password, $row['password']))
                 {
                     $_SESSION['loggedin'] = true;
-                    $_SESSION['id'] = $row['id'];
-                    $_SESSION['login'] = $row['login'];
+                    $_SESSION['user'] = $row;
                     $previous_ip = $row['cur_ip'];
 
                     require_once('src/Info.class.php');
@@ -60,8 +59,7 @@
                     {
                         $_SESSION['error']=$lang['e_login'];
                         $_SESSION['loggedin'] = false;
-                        unset($_SESSION['id']);
-                        unset($_SESSION['login']);
+                        unset($_SESSION['user']);
                         $database->disconnect();
                         exit(header('Location: login.php'));
                     }

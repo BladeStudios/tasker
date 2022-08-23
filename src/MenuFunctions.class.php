@@ -11,8 +11,7 @@ class MenuFunctions
         $result = $user->onLogout($id);
 
         $_SESSION['loggedin'] = false;
-        unset($_SESSION['id']);
-        unset($_SESSION['login']);
+        unset($_SESSION['user']);
         
         return $result;
     }

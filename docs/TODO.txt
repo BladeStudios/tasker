@@ -14,7 +14,7 @@
     3.4. setting up a language
     3.5. setting up a theme (colors)
 4. adding tasks
-    [IN PROGRESS] 4.4. labels
+    [DONE] 4.4. labels
     4.5. possibility of using all options of adding task
     4.6. option to assign a task to a friend
 5. task list view
