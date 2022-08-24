@@ -146,7 +146,7 @@
                         <a href="#">&#9660;more details</a>
                     </div>
                 </div>
-                <div class="task-more-details">
+                <div class="task-more-details" data-task-id="'.$task['id'].'">
                     <div class="task-details-added">Added: '.$info->convertTimeForTimezone($task['created'],'Europe/Paris').'</div>
                     <div class="task-details-created-by">Created by: '.$createdBy.'</div>
                     <div class="task-details-assigned-to">Assigned to: '.$_SESSION['login'].'</div>
@@ -198,6 +198,14 @@
 
             timeSpentElement = taskElement.find('.task-time-spent');
             toggleTask(taskId, 'pause', timeSpentElement);
+        });
+
+        $('.task-more-details-row').click(function(){
+            taskElement = $(this).parent();
+            taskId = taskElement.data('task-id');
+
+            moreDetailsElement = $('.task-more-details[data-task-id="'+taskId+'"');
+            moreDetailsElement.toggle();
         });
 
         function enableTimers()

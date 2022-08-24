@@ -78,7 +78,7 @@ body
     margin-left: auto;
     margin-right: auto;
     padding: 3px 10px 0px 10px;
-    /*display: none;*/
+    display: none;
 }
 
 .task-name-row
@@ -133,7 +133,6 @@ body
 
 .task-buttons
 {
-    height: 60px;
     padding: 3px 10px 0px 10px;
 }
 
