@@ -5,7 +5,7 @@
 <div id="menu">
     
     
-    <?php 
+    <?php
         if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']===false)
         {
             echo '<a href="index.php" class="btn btn-secondary menu-link">'.$lang['home'].'</a>&nbsp;';
@@ -14,9 +14,13 @@
         }
         else
         {
-            echo '<a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].'</a>&nbsp;';
+            require_once('database/Task.class.php');
+            $task = new Task();
+            $number_of_tasks = count($task->getTaskListForUser($_SESSION['user']['id']));
+
+            echo '<a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].' ('.$number_of_tasks.')</a>&nbsp;';
             echo '<a href="addtask.php" class="btn btn-success menu-link">'.$lang['add-task'].'</a>&nbsp;';
-            echo '<a href="logout.php" class="btn btn-danger menu-link">'.$lang['logged_in_as'].$_SESSION['login'].$lang['logout'].'</a>';
+            echo '<a href="logout.php" class="btn btn-danger menu-link">'.$lang['logged_in_as'].$_SESSION['user']['login'].$lang['logout'].'</a>';
         }
     
     ?>
