@@ -91,12 +91,20 @@ body
 .task-name
 {
     font-size: 30px;
+    float: left;
 }
 
 .task-status
 {
-    text-align: right;
-    background-color: cyan;
+    float: left;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-left: 5px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .task-description

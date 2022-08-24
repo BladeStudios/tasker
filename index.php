@@ -88,6 +88,14 @@
                     default: $difficultyColor = 'black';
                 }
 
+                switch($taskInfo['task_statuses'][$task['status_id']])
+                {
+                    case 'TO DO': $statusColor = '#3399FF'; break;
+                    case 'IN PROGRESS': $statusColor = '#00CC00'; break;
+                    case 'PAUSED': $statusColor = '#FFFF33'; break;
+                    case 'DONE': $statusColor = '#FF3333'; break;
+                }
+
                 if(empty($task['deadline'])) $task['deadline'] = 'none';
 
                 if($info->isTaskRunning($task['started'],$task['stopped']))
@@ -106,8 +114,8 @@
                 echo '
                 <div class="task" data-task-id="'.$task['id'].'" data-task-difficulty-id="'.$task['difficulty_id'].'" data-time-spent="'.$timeSpent.'" data-exp-per-min="'.$info->getExpPerMin()[$task['difficulty_id']].'">
                     <div class="task-name-row">
-                        <span class="task-name">'.$task['name'].'</span>
-                        <span class="task-status">'.$taskInfo['task_statuses'][$task['status_id']].'</span>
+                        <div class="task-name">'.$task['name'].'</div>
+                        <div class="task-status" style="background-color: '.$statusColor.'">'.$taskInfo['task_statuses'][$task['status_id']].'</div>
                     </div>
                     <div class="task-description">'.$task['description'].'</div>
                     <div class="task-info-table-container">
