@@ -32,6 +32,8 @@ body
 #container
 {
     flex: 1 0 auto;
+    height: 100px;
+    overflow-y: auto;
 }
 
 .footer
