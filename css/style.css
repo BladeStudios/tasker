@@ -111,6 +111,7 @@ body
 {
     padding: 3px 10px 10px 10px;
     text-align: left;
+    word-wrap: break-word;
 }
 
 .task-info-table-container
