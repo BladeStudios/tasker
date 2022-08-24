@@ -143,7 +143,7 @@
                         <button class="btnTaskFinish btn btn-danger">FINISH TASK</button>
                     </div>
                     <div class="task-more-details-row">
-                        <a href="#">&#9660;more details</a>
+                        &#9660;more details
                     </div>
                 </div>
                 <div class="task-more-details" data-task-id="'.$task['id'].'">
