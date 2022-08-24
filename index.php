@@ -94,6 +94,7 @@
                     case 'IN PROGRESS': $statusColor = '#00CC00'; break;
                     case 'PAUSED': $statusColor = '#FFFF33'; break;
                     case 'DONE': $statusColor = '#FF3333'; break;
+                    default: $statusColor = '#FFFFFF'; break;
                 }
 
                 if(empty($task['deadline'])) $task['deadline'] = 'none';
@@ -236,6 +237,7 @@
 
         function startClock(taskId, starting_seconds, exp_earned, exp_per_min)
         {
+            changeTaskStatus(taskId, 'IN PROGRESS');
             if(!(clocks[taskId] && clocks[taskId].length)) clocks[taskId] = [];
 
             clocks[taskId][0] = starting_seconds;
@@ -251,7 +253,23 @@
 
         function stopClock(taskId)
         {
+            changeTaskStatus(taskId, 'PAUSED');
             clearInterval(clocks[taskId][3]);
+        }
+
+        function changeTaskStatus(taskId, newStatus)
+        {
+            statusElement = $('.task[data-task-id="'+taskId+'"').find('.task-status');
+            switch(newStatus)
+            {
+                case 'TO DO': color = '#3399FF'; break;
+                case 'IN PROGRESS': color = '#00CC00'; break;
+                case 'PAUSED': color = '#FFFF33'; break;
+                case 'DONE': color = '#FF3333'; break;
+                default: color = '#FFFFFF'; break;
+            }
+            statusElement.text(newStatus);
+            statusElement.css('background-color', color);
         }
 
         function updateTimer(taskId)
