@@ -23,7 +23,7 @@
         'e_exception' => 'An error occured: ',
         'e_wrong_credentials' => 'Invalid login credentials. Try again.',
         'logged_in_as' => 'LOGGED IN AS ',
-        'logout' => ' (LOGOUT)',
+        'logout' => 'Log out',
         'title_login' => 'Sign in',
         'title_register' => 'Register',
         'logout_successful' => 'You have successfully logged out.',

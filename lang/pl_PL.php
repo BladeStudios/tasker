@@ -23,7 +23,7 @@
         'e_exception' => 'Wystąpił błąd: ',
         'e_wrong_credentials' => 'Niepoprawne dane logowania. Spróbuj jeszcze raz.',
         'logged_in_as' => 'ZALOGOWANY JAKO ',
-        'logout' => ' (WYLOGUJ)',
+        'logout' => 'Wyloguj',
         'title_login' => 'Logowanie',
         'title_register' => 'Rejestracja',
         'logout_successful' => 'Nastąpiło pomyślne wylogowanie.',

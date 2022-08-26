@@ -18,9 +18,27 @@
             $task = new Task();
             $number_of_tasks = count($task->getTaskListForUser($_SESSION['user']['id']));
 
-            echo '<a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].' ('.$number_of_tasks.')</a>&nbsp;';
-            echo '<a href="addtask.php" class="btn btn-success menu-link">'.$lang['add-task'].'</a>&nbsp;';
-            echo '<a href="logout.php" class="btn btn-danger menu-link">'.$lang['logged_in_as'].$_SESSION['user']['login'].$lang['logout'].'</a>';
+            require_once('src/Exp.class.php');
+            $exp = new Exp();
+            $exp_gained_on_this_level = $exp->getLevelAndPercentageByExp($_SESSION['user']['experience'])['exp_gained_on_this_level'];
+            $exp_to_advance = $exp->getLevelAndPercentageByExp($_SESSION['user']['experience'])['exp_to_advance'];
+            $percentage = floor($exp_gained_on_this_level/$exp_to_advance*100);
+
+            echo '<div id="menu-links"><a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].' ('.$number_of_tasks.')</a>';
+            echo '<a href="addtask.php" class="btn btn-success menu-link">'.$lang['add-task'].'</a>';
+            echo '<a href="logout.php" class="btn btn-danger menu-link">'.$lang['logout'].'</a></div>';
+
+            echo
+            '<div id="user">
+                <div id="user-left">
+                    <div id="nick-and-level">'.$_SESSION['user']['login'].' (Level '.$_SESSION['user']['level'].')</div>
+                    <div id="experience-bar">
+                        <div id="progress-text">'.$exp_gained_on_this_level.'/'.$exp_to_advance.' XP</div>
+                        <div id="progress-bar" style="width: '.$percentage.'%"></div>
+                    </div>
+                </div>
+                <div id="photo"><img src="img/user.png"/></div>
+            </div>';
         }
     
     ?>

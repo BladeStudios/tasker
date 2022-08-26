@@ -12,7 +12,12 @@ body
 }
 
 #app_desc { border-bottom: solid black 3px; }
-#menu { border-bottom: solid black 2px;}
+
+#menu
+{
+    border-bottom: solid black 2px;
+}
+
 #container { border-bottom: solid black 2px; }
 
 #app_title
@@ -26,6 +31,7 @@ body
 {
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 5px;
     font-weight: bold;
 }
 
@@ -61,7 +67,8 @@ body
 
 .task
 {
-    width: 700px;
+    width: 80%;
+    max-width: 1060px;
     border: solid black 1px;
     background-color: white;
     margin-top: 10px;
@@ -71,7 +78,8 @@ body
 
 .task-more-details
 {
-    width: 700px;
+    width: 80%;
+    max-width: 1060px;
     border-left: solid black 1px;
     border-right: solid black 1px;
     border-bottom: solid black 1px;
@@ -119,6 +127,8 @@ body
 .task-info-table-container
 {
     padding-bottom: 10px;
+    padding-left: 10px;
+    float: left;
 }
 
 .task-info-table
@@ -137,6 +147,7 @@ body
 .task-buttons
 {
     padding: 3px 10px 0px 10px;
+    float: left;
 }
 
 .task-more-details-row
@@ -145,6 +156,7 @@ body
     font-size: 12px;
     text-align: left;
     color: #007bff;
+    clear: both;
 }
 
 .task-more-details-row:hover
@@ -162,4 +174,58 @@ body
 .task-xp-earned
 {
     font-weight: bold;
+}
+
+#menu-links
+{
+    float: left;
+}
+
+#user
+{
+    float: right;
+}
+
+#user-left
+{
+    float: left;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: white;
+}
+
+#photo
+{
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+#nick-and-level
+{
+    width: 200px;
+    height: 25px;
+    border-bottom: 1px solid black;
+}
+
+#experience-bar
+{
+    height: 25px;
+    position: relative;
+}
+
+#progress-text
+{
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+}
+
+#progress-bar
+{
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background-color: red;
 }
