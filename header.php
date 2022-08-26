@@ -24,7 +24,9 @@
             $exp_to_advance = $exp->getLevelAndPercentageByExp($_SESSION['user']['experience'])['exp_to_advance'];
             $percentage = floor($exp_gained_on_this_level/$exp_to_advance*100);
 
-            echo '<div id="menu-links"><a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].' ('.$number_of_tasks.')</a>';
+            echo '<div id="menu-links">';
+            echo '<a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].' ('.$number_of_tasks.')</a>';
+            echo '<a href="highscores.php" class="btn btn-warning menu-link">'.$lang['highscores'].'</a>';
             echo '<a href="addtask.php" class="btn btn-success menu-link">'.$lang['add-task'].'</a>';
             echo '<a href="logout.php" class="btn btn-danger menu-link">'.$lang['logout'].'</a></div>';
 

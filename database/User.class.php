@@ -269,6 +269,34 @@ class User
             return false;
         }
     }
+
+    public function getUsersHighscores()
+    {
+        require_once('database/Database.class.php');
+
+        try
+        {
+            $db_obj = new Database();
+            $conn = $db_obj->connect();
+
+            $sql = "SELECT login, level, experience FROM ".$this->tableName." ORDER BY experience DESC LIMIT 20";
+
+            $st = $conn->prepare($sql);
+
+            $st->execute();
+            $st->setFetchMode(PDO::FETCH_ASSOC);
+            $db_obj->disconnect();
+            $result = $st->fetchAll();
+            return $result;
+        }
+        catch(PDOException $e)
+        {
+            require_once('src/Logger.class.php');
+            $logger = new Logger();
+            $logger->log('PDO Exception in User.class.php:getUsersHighscores(). Error info: '.$e->getMessage());
+            return false;
+        }
+    }
 }
 
 

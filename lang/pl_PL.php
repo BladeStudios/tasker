@@ -42,6 +42,10 @@
         'addtask_difficulty' => 'Poziom trudności',
         'addtask_easy' => 'Łatwy',
         'addtask_medium' => 'Średni',
-        'addtask_hard' => 'Trudny'
+        'addtask_hard' => 'Trudny',
+        'highscores' => 'Najlepsze wyniki',
+        'nickname' => 'Nazwa użytkownika',
+        'level' => 'Poziom',
+        'experience' => 'Punkty doświadczenia'
     )
 ?>

@@ -230,3 +230,38 @@ body
     height: 100%;
     background-color: #00FF00;
 }
+
+#highscores-table
+{
+    background-color: white;
+    margin: auto;
+    table-layout: fixed;
+    width: 80%;
+}
+
+#highscores-table th, td
+{
+    text-align: center;
+    border: 1px solid black;
+}
+
+#highscores-table-div
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#th-id
+{
+    width: 5%;
+}
+
+#th-level
+{
+    width: 10%;
+}
+
+#th-experience
+{
+    width: 30%;
+}

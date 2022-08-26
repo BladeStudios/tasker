@@ -42,6 +42,10 @@
         'addtask_difficulty' => 'Difficulty',
         'addtask_easy' => 'Easy',
         'addtask_medium' => 'Medium',
-        'addtask_hard' => 'Hard'
+        'addtask_hard' => 'Hard',
+        'highscores' => 'Highscores',
+        'nickname' => 'Name',
+        'level' => 'Level',
+        'experience' => 'Experience points'
     )
 ?>
