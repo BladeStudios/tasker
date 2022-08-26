@@ -14,7 +14,18 @@
 </head>
 <body>
 
-<?php require('header.php'); ?>
+<?php
+
+    if(isset($_POST['name'])) //add task
+    {
+        require_once('database/Task.class.php');
+        $task = new Task();
+        if($task->addTask($_SESSION['user']['id'], $_SESSION['user']['id'],0,$_POST['name'],$_POST['description'],$_POST['difficulty'],$_POST['visibility'],null))
+            $_SESSION['info'] = $lang['task-added'];
+    }
+
+    require('header.php');
+?>
 <div id="container">
 <br>
 <div id="title"><?php echo $lang['title_addtask']; ?></div>
@@ -29,13 +40,6 @@
     {
         echo '<div style="color: blue; font-family: Verdana; font-size: 15pt">'.$_SESSION['info'].'</div>';
         unset($_SESSION['info']);
-    }
-
-    if(isset($_POST['name'])) //add task
-    {
-        require_once('database/Task.class.php');
-        $task = new Task();
-        $task->addTask($_SESSION['user']['id'], $_SESSION['user']['id'],0,$_POST['name'],$_POST['description'],$_POST['difficulty'],$_POST['visibility'],null);
     }
 
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']===true)

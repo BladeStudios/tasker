@@ -47,6 +47,7 @@
         'nickname' => 'Nazwa użytkownika',
         'level' => 'Poziom',
         'experience' => 'Punkty doświadczenia',
-        'task-history' => 'Historia zadań'
+        'task-history' => 'Historia zadań',
+        'task-added' => 'Dodawanie zadania zakończone sukcesem!'
     )
 ?>

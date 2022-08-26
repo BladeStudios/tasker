@@ -47,6 +47,7 @@
         'nickname' => 'Name',
         'level' => 'Level',
         'experience' => 'Experience points',
-        'task-history' => 'Task history'
+        'task-history' => 'Task history',
+        'task-added' => 'Task successfully added!'
     )
 ?>
