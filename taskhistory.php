@@ -32,7 +32,7 @@
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']===true)
     {
         echo '<br>
-        <div id="title">'.$lang['task-list'].'</div>
+        <div id="title">'.$lang['task-history'].'</div>
         <br>';
         if(isset($_SESSION['user']['id']))
         {
@@ -50,7 +50,7 @@
 
             require_once('database/Task.class.php');
             $task_obj = new Task();
-            $taskList = $task_obj->getTaskListForUser($_SESSION['user']['id'],'unfinished');
+            $taskList = $task_obj->getTaskListForUser($_SESSION['user']['id'],'finished');
             if($taskList===false) $ok = false;
 
             if(!$ok)
@@ -190,46 +190,6 @@
 <script type="text/javascript">
     clocks = [];
     $(document).ready(function(){
-        enableTimers();
-        $('.btnTaskStart').click(function(){
-            taskElement = $(this).parent().parent();
-            taskId = taskElement.data('task-id');
-            $(this).prop('disabled',true);
-
-            pauseButton = $(this).parent().children('.btnTaskPause');
-            pauseButton.prop('disabled',false);
-
-            timeSpentElement = taskElement.find('.task-time-spent');
-            toggleTask(taskId, 'start', timeSpentElement);
-        });
-
-        $('.btnTaskPause').click(function(){
-            taskElement = $(this).parent().parent();
-            taskId = taskElement.data('task-id');
-            $(this).prop('disabled',true);
-
-            startButton = $(this).parent().children('.btnTaskStart');
-            startButton.prop('disabled',false);
-
-            timeSpentElement = taskElement.find('.task-time-spent');
-            toggleTask(taskId, 'pause', timeSpentElement);
-        });
-
-        $('.btnTaskFinish').click(function(){
-            taskElement = $(this).parent().parent();
-            taskId = taskElement.data('task-id');
-            $(this).prop('disabled',true);
-
-            startButton = $(this).parent().children('.btnTaskStart');
-            startButton.prop('disabled',true);
-
-            pauseButton = $(this).parent().children('.btnTaskPause');
-            pauseButton.prop('disabled',true);
-
-            timeSpentElement = taskElement.find('.task-time-spent');
-            toggleTask(taskId, 'finish', timeSpentElement);
-        });
-
         $('.task-more-details-row').click(function(){
             taskElement = $(this).parent();
             taskId = taskElement.data('task-id');
@@ -237,135 +197,6 @@
             moreDetailsElement = $('.task-more-details[data-task-id="'+taskId+'"');
             moreDetailsElement.toggle();
         });
-
-        function enableTimers()
-        {
-            elements = $('.btnTaskStart:disabled').parent().parent();
-            elements.each(function(){
-                if($(this).data('is-task-finished') == false)
-                {
-                    taskId = $(this).data('task-id');
-                    timeSpent = $(this).data('time-spent');
-                    difficultyId = $(this).data('task-difficulty-id');
-                    expPerMin = $(this).data('exp-per-min');
-                    interval = 60/expPerMin; //every interval seconds user gets 1 xp
-                    expEarned = Math.floor(timeSpent/interval)
-                    startClock(taskId, timeSpent, expEarned, expPerMin);
-                }    
-            });
-        }
-
-        function toggleTask(taskId, option, clockElement)
-        {
-            $.ajax('ajax.php', {
-                type: 'POST',
-                data: {id: taskId, fun: option},
-                success: function(data, status, xhr){
-                    toggleClock(taskId, data);
-                    if(option=='finish')
-                        updateLevelAndXP(taskId, data);
-                }
-            });
-        }
-
-        function updateLevelAndXP(taskId, data)
-        {
-            data = JSON.parse(data);
-            if(data.status=='finished')
-            {
-                $('#nick-and-level').text(data.login+' (Level '+data.level+')');
-                $('#progress-text').text(data.exp_gained+'/'+data.exp_to_advance+' XP');
-                percentage = Math.floor(data.exp_gained/data.exp_to_advance*100);
-                $('#progress-bar').css('width',percentage+'%');
-
-                expEarnedElement = $('.task[data-task-id="'+taskId+'"').find('.task-xp-earned');
-                expEarnedElement.text(data.exp_earned);
-            }
-        }
-
-        function toggleClock(taskId, data)
-        {
-            data = JSON.parse(data);
-            switch(data.status)
-            {
-                case 'started': startClock(taskId, data.time_spent, data.exp_earned, data.exp_per_min); break;
-                case 'paused': pauseClock(taskId); break;
-                case 'finished': stopClock(taskId,data.should_clear_interval); break;
-                case 'already finished': break;
-            }
-        }
-
-        function startClock(taskId, starting_seconds, exp_earned, exp_per_min)
-        {
-            changeTaskStatus(taskId, 'IN PROGRESS');
-            if(!(clocks[taskId] && clocks[taskId].length)) clocks[taskId] = [];
-
-            clocks[taskId][0] = starting_seconds;
-            clocks[taskId][1] = exp_earned;
-            clocks[taskId][2] = exp_per_min;
-
-            updateTimer(taskId, clocks[taskId][0]);
-
-            clocks[taskId][3] = setInterval(function(){
-                updateTimer(taskId);
-            }, 1000);
-        }
-
-        function pauseClock(taskId)
-        {
-            changeTaskStatus(taskId, 'PAUSED');
-            clearInterval(clocks[taskId][3]);
-        }
-
-        function stopClock(taskId, shouldClearInterval)
-        {
-            changeTaskStatus(taskId, 'DONE');
-            if(shouldClearInterval)
-                clearInterval(clocks[taskId][3]);
-        }
-
-        function changeTaskStatus(taskId, newStatus)
-        {
-            statusElement = $('.task[data-task-id="'+taskId+'"').find('.task-status');
-            switch(newStatus)
-            {
-                case 'TO DO': color = '#3399FF'; break;
-                case 'IN PROGRESS': color = '#00CC00'; break;
-                case 'PAUSED': color = '#FFFF33'; break;
-                case 'DONE': color = '#FF3333'; break;
-                default: color = '#FFFFFF'; break;
-            }
-            statusElement.text(newStatus);
-            statusElement.css('background-color', color);
-        }
-
-        function updateTimer(taskId)
-        {
-            clocks[taskId][0] += 1;
-            if((clocks[taskId][0] % 20 == 0 && clocks[taskId][2] == 3) ||
-            (clocks[taskId][0] % 10 == 0 && clocks[taskId][2] == 6) ||
-            (clocks[taskId][0] % 5 == 0 && clocks[taskId][2] == 12))
-                clocks[taskId][1] += 1;
-
-            timerElement = $('.task[data-task-id="'+taskId+'"').find('.task-time-spent');
-            timerElement.text(toHHMMSS(clocks[taskId][0]));
-
-            expEarnedElement = $('.task[data-task-id="'+taskId+'"').find('.task-xp-earned');
-            expEarnedElement.text(Math.floor(clocks[taskId][1]));
-        }
-
-        function toHHMMSS(number_of_seconds)
-        {
-            var sec_num = parseInt(number_of_seconds, 10);
-            var hours   = Math.floor(sec_num / 3600);
-            var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-            var seconds = sec_num - (hours * 3600) - (minutes * 60);
-
-            if (hours   < 10) {hours   = "0"+hours;}
-            if (minutes < 10) {minutes = "0"+minutes;}
-            if (seconds < 10) {seconds = "0"+seconds;}
-            return hours+':'+minutes+':'+seconds;
-        }
     });
 </script>
 

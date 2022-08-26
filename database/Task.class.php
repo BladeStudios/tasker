@@ -47,7 +47,7 @@ class Task
         }
     }
 
-    public function getTaskListForUser($user_id)
+    public function getTaskListForUser($user_id, $option)
     {
         require_once('database/Database.class.php');
 
@@ -56,7 +56,15 @@ class Task
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id";
+            switch($option)
+            {
+                case 'all': $args = ""; break;
+                case 'unfinished': $args = " AND status_id != 3"; break;
+                case 'finished': $args = " AND status_id = 3"; break;
+                default: $args = ""; break;
+            }
+
+            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id".$args;
 
             $st = $conn->prepare($sql);
 

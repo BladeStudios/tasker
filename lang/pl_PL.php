@@ -46,6 +46,7 @@
         'highscores' => 'Najlepsze wyniki',
         'nickname' => 'Nazwa użytkownika',
         'level' => 'Poziom',
-        'experience' => 'Punkty doświadczenia'
+        'experience' => 'Punkty doświadczenia',
+        'task-history' => 'Historia zadań'
     )
 ?>

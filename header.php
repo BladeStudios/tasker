@@ -16,7 +16,8 @@
         {
             require_once('database/Task.class.php');
             $task = new Task();
-            $number_of_tasks = count($task->getTaskListForUser($_SESSION['user']['id']));
+            $unfinished_tasks = count($task->getTaskListForUser($_SESSION['user']['id'],'unfinished'));
+            $finished_tasks = count($task->getTaskListForUser($_SESSION['user']['id'],'finished'));
 
             require_once('src/Exp.class.php');
             $exp = new Exp();
@@ -25,7 +26,8 @@
             $percentage = floor($exp_gained_on_this_level/$exp_to_advance*100);
 
             echo '<div id="menu-links">';
-            echo '<a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].' ('.$number_of_tasks.')</a>';
+            echo '<a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].' ('.$unfinished_tasks.')</a>';
+            echo '<a href="taskhistory.php" class="btn btn-secondary menu-link">'.$lang['task-history'].' ('.$finished_tasks.')</a>';
             echo '<a href="highscores.php" class="btn btn-warning menu-link">'.$lang['highscores'].'</a>';
             echo '<a href="addtask.php" class="btn btn-success menu-link">'.$lang['add-task'].'</a>';
             echo '<a href="logout.php" class="btn btn-danger menu-link">'.$lang['logout'].'</a></div>';

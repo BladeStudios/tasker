@@ -46,6 +46,7 @@
         'highscores' => 'Highscores',
         'nickname' => 'Name',
         'level' => 'Level',
-        'experience' => 'Experience points'
+        'experience' => 'Experience points',
+        'task-history' => 'Task history'
     )
 ?>
