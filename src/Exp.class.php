@@ -21,6 +21,7 @@ class Exp
                 $level = $key-1;
                 $exp_gained_on_this_level = $exp - $data[$key-1];
                 $exp_to_advance = $value - $data[$key-1];
+                $total_exp_to_next_level = $value;
                 break;
             }
             else if($exp==$value)
@@ -28,6 +29,7 @@ class Exp
                 $level = $key;
                 $exp_gained_on_this_level = 0;
                 $exp_to_advance = $data[$key+1] - $value;
+                $total_exp_to_next_level = $data[$key+1];
                 break;
             }
         }
@@ -37,12 +39,14 @@ class Exp
             $level = 501;
             $exp_gained_on_this_level = 0;
             $exp_to_advance = 0;
+            $total_exp_to_next_level = 0;
         }
 
         return [
             'level' => $level,
             'exp_gained_on_this_level' => $exp_gained_on_this_level,
-            'exp_to_advance' => $exp_to_advance
+            'exp_to_advance' => $exp_to_advance,
+            'total_exp_to_next_level' => $total_exp_to_next_level
         ];
     }
 }

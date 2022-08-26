@@ -103,17 +103,29 @@
                 {
                     $startDisabled = ' disabled';
                     $pauseDisabled = '';
+                    $finishDisabled = '';
                     $timeSpent = $task['time_spent'] + (strtotime($info->getTime()) - strtotime($task['started']));
+                    $isTaskFinished = 'false';
+                }
+                else if($task['status_id']==3) //task finished
+                {
+                    $startDisabled = ' disabled';
+                    $pauseDisabled = ' disabled';
+                    $finishDisabled = ' disabled';
+                    $timeSpent = $task['time_spent'];
+                    $isTaskFinished = 'true';
                 }
                 else
                 {
                     $startDisabled = '';
                     $pauseDisabled = ' disabled';
+                    $finishDisabled = '';
                     $timeSpent = $task['time_spent'];
+                    $isTaskFinished = 'false';
                 }
 
                 echo '
-                <div class="task" data-task-id="'.$task['id'].'" data-task-difficulty-id="'.$task['difficulty_id'].'" data-time-spent="'.$timeSpent.'" data-exp-per-min="'.$info->getExpPerMin()[$task['difficulty_id']].'">
+                <div class="task" data-task-id="'.$task['id'].'" data-task-difficulty-id="'.$task['difficulty_id'].'" data-time-spent="'.$timeSpent.'" data-exp-per-min="'.$info->getExpPerMin()[$task['difficulty_id']].'" data-is-task-finished="'.$isTaskFinished.'">
                     <div class="task-name-row">
                         <div class="task-name">'.$task['name'].'</div>
                         <div class="task-status" style="background-color: '.$statusColor.'">'.$taskInfo['task_statuses'][$task['status_id']].'</div>
@@ -140,7 +152,7 @@
                     <div class="task-buttons">
                         <button class="btnTaskStart btn btn-success"'.$startDisabled.'>START TASK</button>
                         <button class="btnTaskPause btn btn-warning"'.$pauseDisabled.'>PAUSE</button>
-                        <button class="btnTaskFinish btn btn-danger">FINISH TASK</button>
+                        <button class="btnTaskFinish btn btn-danger"'.$finishDisabled.'>FINISH TASK</button>
                     </div>
                     <div class="task-more-details-row">
                         &#9660;more details
@@ -200,6 +212,21 @@
             toggleTask(taskId, 'pause', timeSpentElement);
         });
 
+        $('.btnTaskFinish').click(function(){
+            taskElement = $(this).parent().parent();
+            taskId = taskElement.data('task-id');
+            $(this).prop('disabled',true);
+
+            startButton = $(this).parent().children('.btnTaskStart');
+            startButton.prop('disabled',true);
+
+            pauseButton = $(this).parent().children('.btnTaskPause');
+            pauseButton.prop('disabled',true);
+
+            timeSpentElement = taskElement.find('.task-time-spent');
+            toggleTask(taskId, 'finish', timeSpentElement);
+        });
+
         $('.task-more-details-row').click(function(){
             taskElement = $(this).parent();
             taskId = taskElement.data('task-id');
@@ -212,13 +239,16 @@
         {
             elements = $('.btnTaskStart:disabled').parent().parent();
             elements.each(function(){
-                taskId = $(this).data('task-id');
-                timeSpent = $(this).data('time-spent');
-                difficultyId = $(this).data('task-difficulty-id');
-                expPerMin = $(this).data('exp-per-min');
-                interval = 60/expPerMin; //every interval seconds user gets 1 xp
-                expEarned = Math.floor(timeSpent/interval)
-                startClock(taskId, timeSpent, expEarned, expPerMin);
+                if($(this).data('is-task-finished') == false)
+                {
+                    taskId = $(this).data('task-id');
+                    timeSpent = $(this).data('time-spent');
+                    difficultyId = $(this).data('task-difficulty-id');
+                    expPerMin = $(this).data('exp-per-min');
+                    interval = 60/expPerMin; //every interval seconds user gets 1 xp
+                    expEarned = Math.floor(timeSpent/interval)
+                    startClock(taskId, timeSpent, expEarned, expPerMin);
+                }    
             });
         }
 
@@ -229,8 +259,25 @@
                 data: {id: taskId, fun: option},
                 success: function(data, status, xhr){
                     toggleClock(taskId, data);
+                    if(option=='finish')
+                        updateLevelAndXP(taskId, data);
                 }
             });
+        }
+
+        function updateLevelAndXP(taskId, data)
+        {
+            data = JSON.parse(data);
+            if(data.status=='finished')
+            {
+                $('#nick-and-level').text(data.login+' (Level '+data.level+')');
+                $('#progress-text').text(data.exp_gained+'/'+data.exp_to_advance+' XP');
+                percentage = Math.floor(data.exp_gained/data.exp_to_advance*100);
+                $('#progress-bar').css('width',percentage+'%');
+
+                expEarnedElement = $('.task[data-task-id="'+taskId+'"').find('.task-xp-earned');
+                expEarnedElement.text(data.exp_earned);
+            }
         }
 
         function toggleClock(taskId, data)
@@ -239,7 +286,9 @@
             switch(data.status)
             {
                 case 'started': startClock(taskId, data.time_spent, data.exp_earned, data.exp_per_min); break;
-                case 'paused': stopClock(taskId); break;
+                case 'paused': pauseClock(taskId); break;
+                case 'finished': stopClock(taskId,data.should_clear_interval); break;
+                case 'already finished': break;
             }
         }
 
@@ -259,10 +308,17 @@
             }, 1000);
         }
 
-        function stopClock(taskId)
+        function pauseClock(taskId)
         {
             changeTaskStatus(taskId, 'PAUSED');
             clearInterval(clocks[taskId][3]);
+        }
+
+        function stopClock(taskId, shouldClearInterval)
+        {
+            changeTaskStatus(taskId, 'DONE');
+            if(shouldClearInterval)
+                clearInterval(clocks[taskId][3]);
         }
 
         function changeTaskStatus(taskId, newStatus)
