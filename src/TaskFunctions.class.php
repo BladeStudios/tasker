@@ -287,13 +287,16 @@ class TaskFunctions
                 $_SESSION['user']['experience'] = $new_experience;
                 $_SESSION['user']['level'] = $new_level;
 
-                $sql2 = "UPDATE users SET level=:level, experience=:experience WHERE id=:executor_id";
+                $new_time_spent_tasks_overall = $result2['time_spent_tasks_overall'] + $time_spent;
+
+                $sql2 = "UPDATE users SET level=:level, experience=:experience, time_spent_tasks_overall=:new_time_spent_tasks_overall WHERE id=:executor_id";
                 $st = $conn->prepare($sql2);
 
                 $data2 = [
                     'executor_id' => $result['executor_id'],
                     'level' => $new_level,
-                    'experience' => $new_experience
+                    'experience' => $new_experience,
+                    'new_time_spent_tasks_overall' => $new_time_spent_tasks_overall
                 ];
 
                 $st->execute($data2);
@@ -302,25 +305,36 @@ class TaskFunctions
             }
             else if($stopped > $started) //TASK PAUSED
             {
-                $total_exp = $result['total_exp'];
+                $time_spent = $result['time_spent'];
+                $new_time_spent_tasks_overall = $result2['time_spent_tasks_overall'] + $time_spent;
+
+                switch($result['difficulty_id'])
+                {
+                    case 0: $new_exp = max(floor($time_spent/(60/$multiplier[0])),$minimumExp[0]); break; //easy task
+                    case 1: $new_exp = max(floor($time_spent/(60/$multiplier[1])),$minimumExp[1]); break; //medium task
+                    case 2: $new_exp = max(floor($time_spent/(60/$multiplier[2])),$minimumExp[2]); break; //hard task
+                    default: $new_exp = max(floor($time_spent/(60/$multiplier[0])),$minimumExp[0]); break;
+                }
 
                 $sql = "UPDATE tasks SET status_id=3 WHERE id=:id";
+                $data = [ 'id' => $task_id ];
                 $st = $conn->prepare($sql);
-                $st->execute();
+                $st->execute($data);
 
                 //update users table
-                $new_experience = $old_experience;
+                $new_experience = $old_experience + $new_exp;
                 $new_level = $exp->getLevelAndPercentageByExp($new_experience)['level'];
                 $_SESSION['user']['experience'] = $new_experience;
                 $_SESSION['user']['level'] = $new_level;
 
-                $sql2 = "UPDATE users SET level=:level, experience=:experience WHERE id=:executor_id";
+                $sql2 = "UPDATE users SET level=:level, experience=:experience, time_spent_tasks_overall=:new_time_spent_tasks_overall WHERE id=:executor_id";
                 $st = $conn->prepare($sql2);
 
                 $data2 = [
                     'executor_id' => $result['executor_id'],
                     'level' => $new_level,
-                    'experience' => $new_experience
+                    'experience' => $new_experience,
+                    'new_time_spent_tasks_overall' => $new_time_spent_tasks_overall
                 ];
 
                 $st->execute($data2);
