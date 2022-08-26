@@ -19,9 +19,6 @@ CREATE TABLE tasker.users (
     banned_until DATETIME DEFAULT NULL COMMENT 'date and time when the account will be unbanned',
     level int(10) UNSIGNED NOT NULL COMMENT 'current account level (depends on experience points)',
     experience BIGINT(20) UNSIGNED NOT NULL COMMENT 'current number of experience points for doing tasks',
-    time_spent_easy_tasks BIGINT(20) UNSIGNED NOT NULL COMMENT 'total number of seconds user has been doing easy tasks',
-    time_spent_medium_tasks BIGINT(20) UNSIGNED NOT NULL COMMENT 'total number of seconds user has been doing medium tasks',
-    time_spent_hard_tasks BIGINT(20) UNSIGNED NOT NULL COMMENT 'total number of seconds user has been doing hard tasks',
     time_spent_tasks_overall BIGINT(20) UNSIGNED NOT NULL COMMENT 'total number of seconds user has been doing any tasks',
     timezone varchar(100) DEFAULT NULL COMMENT 'timezone name',
     PRIMARY KEY (id)

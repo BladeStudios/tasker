@@ -15,9 +15,9 @@ class User
 
             $sql = "INSERT INTO ".$this->tableName."
             (login, password, salt, email, position_id, status_id, last_ip, current_ip, online_from, total_online_time, last_activity, browser, system, create_time,
-            banned_until, level, experience, time_spent_easy_tasks, time_spent_medium_tasks, time_spent_hard_tasks, time_spent_tasks_overall, timezone)
+            banned_until, level, experience,time_spent_tasks_overall, timezone)
             VALUES (:login, :password, :salt, :email, :position_id, :status_id, :last_ip, :current_ip, :online_from, :total_online_time, :last_activity, :browser, :system, :create_time,
-            :banned_until, :level, :experience, :time_spent_easy_tasks, :time_spent_medium_tasks, :time_spent_hard_tasks, :time_spent_tasks_overall, :timezone)";
+            :banned_until, :level, :experience, :time_spent_tasks_overall, :timezone)";
 
             $st = $conn->prepare($sql);
             $st->bindParam('login',$login);
@@ -37,9 +37,6 @@ class User
             $st->bindParam('banned_until',$banned_until);
             $st->bindParam('level',$level);
             $st->bindParam('experience',$experience);
-            $st->bindParam('time_spent_easy_tasks',$time_spent_easy_tasks);
-            $st->bindParam('time_spent_medium_tasks',$time_spent_medium_tasks);
-            $st->bindParam('time_spent_hard_tasks',$time_spent_hard_tasks);
             $st->bindParam('time_spent_tasks_overall',$time_spent_tasks_overall);
             $st->bindParam('timezone',$timezone);
 
@@ -55,9 +52,6 @@ class User
             $banned_until = null;
             $level = 1;
             $experience = 0;
-            $time_spent_easy_tasks = 0;
-            $time_spent_medium_tasks = 0;
-            $time_spent_hard_tasks = 0;
             $time_spent_tasks_overall = 0;
             $timezone = 'Europe/Paris';
 
