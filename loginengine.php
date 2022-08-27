@@ -39,7 +39,7 @@
                 {
                     $_SESSION['loggedin'] = true;
                     $_SESSION['user'] = $row;
-                    $previous_ip = $row['cur_ip'];
+                    $previous_ip = $row['current_ip'];
 
                     require_once('src/Info.class.php');
                     $info = new Info();
