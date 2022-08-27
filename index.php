@@ -300,7 +300,7 @@
             changeTaskStatus(taskId, 'IN PROGRESS');
             if(!(clocks[taskId] && clocks[taskId].length)) clocks[taskId] = [];
 
-            clocks[taskId][0] = starting_seconds;
+            clocks[taskId][0] = parseInt(starting_seconds);
             clocks[taskId][1] = exp_earned;
             clocks[taskId][2] = exp_per_min;
 
