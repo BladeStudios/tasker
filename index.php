@@ -304,7 +304,7 @@
             clocks[taskId][1] = exp_earned;
             clocks[taskId][2] = exp_per_min;
 
-            updateTimer(taskId, clocks[taskId][0]);
+            updateTimer(taskId);
 
             clocks[taskId][3] = setInterval(function(){
                 updateTimer(taskId);
