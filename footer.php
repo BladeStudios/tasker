@@ -1,1 +1,1 @@
-<footer class="footer">Powered by BladeStudios (C) 2022</footer>
+<footer class="footer">Version <?php echo file_get_contents('REVISION'); ?> beta. Powered by BladeStudios &copy; 2022</footer>
