@@ -1,0 +1,8 @@
+v1.0.0 beta, 2022-08-26
+
+first working application release
+
+v1.0.1 beta, 2022-08-27
+
+- fixed bug with task time counter counting time spent doing task incorrectly from client side after user clicked START TASK button in Task list view
+- fixed bug with no data shown about who is the task assigned to
