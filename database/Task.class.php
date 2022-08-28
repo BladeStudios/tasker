@@ -4,7 +4,7 @@ class Task
 {
     private $tableName = 'tasks';
 
-    public function addTask($creator_id,$executor_id,$type_id,$name,$description,$difficulty_id,$visibility_id,$deadline)
+    public function addTask($creator_id,$executor_id,$type_id,$name,$description,$priority_id,$visibility_id,$deadline)
     {
         require_once('database/Database.class.php');
 
@@ -13,8 +13,8 @@ class Task
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "INSERT INTO ".$this->tableName." (creator_id, executor_id, type_id, name, description, created, time_spent, started, stopped, status_id, difficulty_id, visibility_id, deadline)
-            VALUES (:creator_id, :executor_id, :type_id, :name, :description, :created, 0, null, null, 0, :difficulty_id, :visibility_id, :deadline)";
+            $sql = "INSERT INTO ".$this->tableName." (creator_id, executor_id, type_id, name, description, created, time_spent, started, stopped, status_id, priority_id, visibility_id, deadline)
+            VALUES (:creator_id, :executor_id, :type_id, :name, :description, :created, 0, null, null, 0, :priority_id, :visibility_id, :deadline)";
 
             $st = $conn->prepare($sql);
 
@@ -29,7 +29,7 @@ class Task
                 'name' => $name,
                 'description' => $description,
                 'created' => $created,
-                'difficulty_id' => $difficulty_id,
+                'priority_id' => $priority_id,
                 'visibility_id' => $visibility_id,
                 'deadline' => $deadline
             ];
@@ -81,7 +81,7 @@ class Task
         {
             require_once('src/Logger.class.php');
             $logger = new Logger();
-            $logger->log('PDO Exception in User.class.php:getTaskDifficultyId(). Error info: '.$e->getMessage());
+            $logger->log('PDO Exception in User.class.php:getTaskListForUser(). Error info: '.$e->getMessage());
             return false;
         }
     }

@@ -43,7 +43,7 @@ CREATE TABLE tasker.tasks (
     started DATETIME DEFAULT NULL COMMENT 'date and time when the user started or restarted doing the task',
     stopped DATETIME DEFAULT NULL COMMENT 'date and time when the user stopped doing the task (by finishing it or pausing it)',
     deadline DATETIME DEFAULT NULL COMMENT 'date when the task should be finished',
-    difficulty_id int(10) UNSIGNED NOT NULL COMMENT 'difficulty level ID',
+    priority_id int(10) UNSIGNED NOT NULL COMMENT 'priority level ID',
     status_id int(10) UNSIGNED NOT NULL COMMENT 'status type ID',
     total_exp int(10) UNSIGNED NOT NULL COMMENT 'total experience gained for the task',
     creator_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who created the task',

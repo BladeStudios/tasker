@@ -170,15 +170,15 @@ class Info
         return $statuses;
     }
 
-    public function getTaskDifficulties()
+    public function getTaskPriorities()
     {
-        $difficulties = [
-            0 => 'Easy',
+        $priorities = [
+            0 => 'Low',
             1 => 'Medium',
-            2 => 'Hard'
+            2 => 'High'
         ];
 
-        return $difficulties;
+        return $priorities;
     }
 
     public function getTaskVisibilities()

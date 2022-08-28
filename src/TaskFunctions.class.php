@@ -35,7 +35,7 @@ class TaskFunctions
 
             //get time_spent
             $time_spent = $result['time_spent'];
-            $exp_earned = $result['time_spent'] * $info->getExpPerMin()[$result['difficulty_id']] / 60;
+            $exp_earned = $result['time_spent'] * $info->getExpPerMin()[$result['priority_id']] / 60;
 
             $sql = "UPDATE tasks SET started=:started, stopped = null, status_id=1 WHERE id=:id";
             $st = $conn->prepare($sql);
@@ -53,7 +53,7 @@ class TaskFunctions
                 'status' => 'started',
                 'time_spent' => $time_spent,
                 'exp_earned' => $exp_earned,
-                'exp_per_min' => $info->getExpPerMin()[$result['difficulty_id']]
+                'exp_per_min' => $info->getExpPerMin()[$result['priority_id']]
             ];
         }
         catch(PDOException $e)
@@ -119,11 +119,11 @@ class TaskFunctions
             $new_time_spent = $result['time_spent'] + $diff;
             $multiplier = $info->getExpPerMin();
 
-            switch($result['difficulty_id'])
+            switch($result['priority_id'])
             {
-                case 0: $new_exp = floor($new_time_spent/(60/$multiplier[0])); break; //easy task
-                case 1: $new_exp = floor($new_time_spent/(60/$multiplier[1])); break; //medium task
-                case 2: $new_exp = floor($new_time_spent/(60/$multiplier[2])); break; //hard task
+                case 0: $new_exp = floor($new_time_spent/(60/$multiplier[0])); break; //low priority
+                case 1: $new_exp = floor($new_time_spent/(60/$multiplier[1])); break; //medium priority
+                case 2: $new_exp = floor($new_time_spent/(60/$multiplier[2])); break; //high priority
                 default: $new_exp = floor($new_time_spent/(60/$multiplier[0])); break;
             }
 
@@ -144,7 +144,7 @@ class TaskFunctions
                 'status' => 'paused',
                 'time_spent' => $new_time_spent,
                 'exp_earned' => $new_exp,
-                'exp_per_min' => $info->getExpPerMin()[$result['difficulty_id']]
+                'exp_per_min' => $info->getExpPerMin()[$result['priority_id']]
             ];
         }
         catch(PDOException $e)
@@ -217,11 +217,11 @@ class TaskFunctions
 
             if($started == null) //START never clicked
             {
-                switch($result['difficulty_id'])
+                switch($result['priority_id'])
                 {
-                    case 0: $new_exp = $minimumExp[0]; break; //easy task
-                    case 1: $new_exp = $minimumExp[1]; break; //medium task
-                    case 2: $new_exp = $minimumExp[2]; break; //hard task
+                    case 0: $new_exp = $minimumExp[0]; break; //low priority
+                    case 1: $new_exp = $minimumExp[1]; break; //medium priority
+                    case 2: $new_exp = $minimumExp[2]; break; //high priority
                     default: $new_exp = $minimumExp[0]; break;
                 }
 
@@ -261,11 +261,11 @@ class TaskFunctions
                 $diff = $calc->getSecondsBetweenDates($started,$finished);
                 $time_spent = $result['time_spent'] + $diff;
 
-                switch($result['difficulty_id'])
+                switch($result['priority_id'])
                 {
-                    case 0: $new_exp = max(floor($time_spent/(60/$multiplier[0])),$minimumExp[0]); break; //easy task
-                    case 1: $new_exp = max(floor($time_spent/(60/$multiplier[1])),$minimumExp[1]); break; //medium task
-                    case 2: $new_exp = max(floor($time_spent/(60/$multiplier[2])),$minimumExp[2]); break; //hard task
+                    case 0: $new_exp = max(floor($time_spent/(60/$multiplier[0])),$minimumExp[0]); break; //low priority
+                    case 1: $new_exp = max(floor($time_spent/(60/$multiplier[1])),$minimumExp[1]); break; //medium priority
+                    case 2: $new_exp = max(floor($time_spent/(60/$multiplier[2])),$minimumExp[2]); break; //high priority
                     default: $new_exp = max(floor($time_spent/(60/$multiplier[0])),$minimumExp[0]); break;
                 }
 
@@ -308,11 +308,11 @@ class TaskFunctions
                 $time_spent = $result['time_spent'];
                 $new_time_spent_tasks_overall = $result2['time_spent_tasks_overall'] + $time_spent;
 
-                switch($result['difficulty_id'])
+                switch($result['priority_id'])
                 {
-                    case 0: $new_exp = max(floor($time_spent/(60/$multiplier[0])),$minimumExp[0]); break; //easy task
-                    case 1: $new_exp = max(floor($time_spent/(60/$multiplier[1])),$minimumExp[1]); break; //medium task
-                    case 2: $new_exp = max(floor($time_spent/(60/$multiplier[2])),$minimumExp[2]); break; //hard task
+                    case 0: $new_exp = max(floor($time_spent/(60/$multiplier[0])),$minimumExp[0]); break; //low priority
+                    case 1: $new_exp = max(floor($time_spent/(60/$multiplier[1])),$minimumExp[1]); break; //medium priority
+                    case 2: $new_exp = max(floor($time_spent/(60/$multiplier[2])),$minimumExp[2]); break; //high priority
                     default: $new_exp = max(floor($time_spent/(60/$multiplier[0])),$minimumExp[0]); break;
                 }
 

@@ -68,7 +68,7 @@
             $info = new Info();
 
             $taskInfo = [
-                'task_difficulties' => $info->getTaskDifficulties(),
+                'task_priorities' => $info->getTaskPriorities(),
                 'task_statuses' => $info->getTaskStatuses(),
                 'task_types' => $info->getTaskTypes(),
                 'task_visibilities' => $info->getTaskVisibilities(),
@@ -83,12 +83,12 @@
             {
                 $createdBy = $user_obj->getUserById($task['creator_id'])['login'];
 
-                switch($taskInfo['task_difficulties'][$task['difficulty_id']])
+                switch($taskInfo['task_priorities'][$task['priority_id']])
                 {
-                    case 'Easy': $difficultyColor = 'green'; break;
-                    case 'Medium': $difficultyColor = 'orange'; break;
-                    case 'Hard': $difficultyColor = 'red'; break;
-                    default: $difficultyColor = 'black';
+                    case 'Low': $priorityColor = 'green'; break;
+                    case 'Medium': $priorityColor = 'orange'; break;
+                    case 'High': $priorityColor = 'red'; break;
+                    default: $priorityColor = 'black';
                 }
 
                 switch($taskInfo['task_statuses'][$task['status_id']])
@@ -128,7 +128,7 @@
                 }
 
                 echo '
-                <div class="task" data-task-id="'.$task['id'].'" data-task-difficulty-id="'.$task['difficulty_id'].'" data-time-spent="'.$timeSpent.'" data-exp-per-min="'.$info->getExpPerMin()[$task['difficulty_id']].'" data-is-task-finished="'.$isTaskFinished.'">
+                <div class="task" data-task-id="'.$task['id'].'" data-task-priority-id="'.$task['priority_id'].'" data-time-spent="'.$timeSpent.'" data-exp-per-min="'.$info->getExpPerMin()[$task['priority_id']].'" data-is-task-finished="'.$isTaskFinished.'">
                     <div class="task-name-row">
                         <div class="task-name">'.$task['name'].'</div>
                         <div class="task-status" style="background-color: '.$statusColor.'">'.$taskInfo['task_statuses'][$task['status_id']].'</div>
@@ -138,16 +138,16 @@
                         <table class="task-info-table">
                             <tr>
                                 <td>Deadline</td>
-                                <td>Difficulty</td>
+                                <td>Priority</td>
                                 <td>Time spent</td>
                                 <td>Value</td>
                                 <td>XP earned</td>
                             </tr>
                             <tr>
                                 <td class="task-deadline">'.$task['deadline'].'</td>
-                                <td class="task-difficulty" style="font-weight: bold; color: '.$difficultyColor.'">'.$taskInfo['task_difficulties'][$task['difficulty_id']].'</td>
+                                <td class="task-priority" style="font-weight: bold; color: '.$priorityColor.'">'.$taskInfo['task_priorities'][$task['priority_id']].'</td>
                                 <td class="task-time-spent">'.$info->convertSecondsToTime($task['time_spent']).'</td>
-                                <td class="task-value">'.$taskInfo['task_exp_per_min'][$task['difficulty_id']].' XP/min</td>
+                                <td class="task-value">'.$taskInfo['task_exp_per_min'][$task['priority_id']].' XP/min</td>
                                 <td class="task-xp-earned">'.$task['total_exp'].'</td>
                             </tr>
                         </table>
@@ -166,7 +166,7 @@
                     <div class="task-details-created-by">Created by: '.$createdBy.'</div>
                     <div class="task-details-assigned-to">Assigned to: '.$_SESSION['login'].'</div>
                     <div class="task-details-visibility">Visibility: '.$taskInfo['task_visibilities'][$task['visibility_id']].'</div>
-                    <div class="task-details-minimum-xp">Minimum XP for this task: '.$taskInfo['task_minimum_exp'][$task['difficulty_id']].'</div>
+                    <div class="task-details-minimum-xp">Minimum XP for this task: '.$taskInfo['task_minimum_exp'][$task['priority_id']].'</div>
                 </div>
                 ';
             }

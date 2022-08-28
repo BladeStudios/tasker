@@ -20,7 +20,7 @@
     {
         require_once('database/Task.class.php');
         $task = new Task();
-        if($task->addTask($_SESSION['user']['id'], $_SESSION['user']['id'],0,$_POST['name'],$_POST['description'],$_POST['difficulty'],$_POST['visibility'],null))
+        if($task->addTask($_SESSION['user']['id'], $_SESSION['user']['id'],0,$_POST['name'],$_POST['description'],$_POST['priority'],$_POST['visibility'],null))
             $_SESSION['info'] = $lang['task-added'];
     }
 
@@ -50,11 +50,11 @@
         <input type="text" name="name" size="60"/><br><br>'.
         $lang['addtask_description'].'<br>
         <textarea name="description" rows="5" cols="100"></textarea><br><br>'.
-        $lang['addtask_difficulty'].'<br>
-        <select name="difficulty">
-            <option value="0">'.$lang['addtask_easy'].'</option>
+        $lang['addtask_priority'].'<br>
+        <select name="priority">
+            <option value="0">'.$lang['addtask_low'].'</option>
             <option value="1">'.$lang['addtask_medium'].'</option>
-            <option value="2">'.$lang['addtask_hard'].'</option>
+            <option value="2">'.$lang['addtask_high'].'</option>
         </select><br><br>
         <input type="hidden" value="3" name="visibility"/><br><br>
         <input type="submit" class="btn btn-success center-in-div" value="'.$lang['add-task'].'"/>
