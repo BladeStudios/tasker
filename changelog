@@ -6,3 +6,8 @@ v1.0.1 beta, 2022-08-27
 
 - fixed bug with task time counter counting time spent doing task incorrectly from client side after user clicked START TASK button in Task list view
 - fixed bug with no data shown about who is the task assigned to
+
+v1.0.2 beta, 2022-08-28
+
+- changed task name length from 32 to 60 characters
+- changed "task difficulty" (Easy/Medium/Hard) to "task priority" (Low/Medium/High) as task priority is more important than its difficulty
