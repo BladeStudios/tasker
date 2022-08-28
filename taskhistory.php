@@ -110,7 +110,7 @@
                     $timeSpent = $task['time_spent'] + (strtotime($info->getTime()) - strtotime($task['started']));
                     $isTaskFinished = 'false';
                 }
-                else if($task['status_id']==3) //task finished
+                else if($taskInfo['task_statuses'][$task['status_id']]=='DONE') //task finished
                 {
                     $startDisabled = ' disabled';
                     $pauseDisabled = ' disabled';

@@ -37,7 +37,7 @@ class TaskFunctions
             $time_spent = $result['time_spent'];
             $exp_earned = $result['time_spent'] * $info->getExpPerMin()[$result['priority_id']] / 60;
 
-            $sql = "UPDATE tasks SET started=:started, stopped = null, status_id=1 WHERE id=:id";
+            $sql = "UPDATE tasks SET started=:started, stopped = null, status_id=2 WHERE id=:id";
             $st = $conn->prepare($sql);
 
 
@@ -127,7 +127,7 @@ class TaskFunctions
                 default: $new_exp = floor($new_time_spent/(60/$multiplier[0])); break;
             }
 
-            $sql = "UPDATE tasks SET stopped=:stopped, time_spent=:new_time_spent, total_exp=:new_exp, status_id=2 WHERE id=:id";
+            $sql = "UPDATE tasks SET stopped=:stopped, time_spent=:new_time_spent, total_exp=:new_exp, status_id=1 WHERE id=:id";
             $st = $conn->prepare($sql);
 
             $data = [

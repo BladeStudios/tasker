@@ -161,8 +161,8 @@ class Info
     {
         $statuses = [
             0 => 'TO DO',
-            1 => 'IN PROGRESS',
-            2 => 'PAUSED',
+            1 => 'PAUSED',
+            2 => 'IN PROGRESS',
             3 => 'DONE',
             4 => 'REMOVED'
         ];
