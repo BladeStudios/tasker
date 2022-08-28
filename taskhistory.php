@@ -164,7 +164,7 @@
                 <div class="task-more-details" data-task-id="'.$task['id'].'">
                     <div class="task-details-added">Added: '.$info->convertTimeForTimezone($task['created'],'Europe/Paris').'</div>
                     <div class="task-details-created-by">Created by: '.$createdBy.'</div>
-                    <div class="task-details-assigned-to">Assigned to: '.$_SESSION['login'].'</div>
+                    <div class="task-details-assigned-to">Assigned to: '.$_SESSION['user']['login'].'</div>
                     <div class="task-details-visibility">Visibility: '.$taskInfo['task_visibilities'][$task['visibility_id']].'</div>
                     <div class="task-details-minimum-xp">Minimum XP for this task: '.$taskInfo['task_minimum_exp'][$task['priority_id']].'</div>
                 </div>
