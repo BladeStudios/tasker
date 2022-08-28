@@ -47,9 +47,9 @@
         echo '<div id="addtaskform">
         <form method="post">'.
         $lang['addtask_name'].'<br>
-        <input type="text" name="name" size="60"/><br><br>'.
+        <input type="text" name="name" size="60" maxlength="60"/><br><br>'.
         $lang['addtask_description'].'<br>
-        <textarea name="description" rows="5" cols="100"></textarea><br><br>'.
+        <textarea name="description" rows="8" cols="50" maxlength="500"></textarea><br><br>'.
         $lang['addtask_priority'].'<br>
         <select name="priority">
             <option value="0">'.$lang['addtask_low'].'</option>
