@@ -22,7 +22,7 @@ CREATE TABLE tasker.users (
     time_spent_tasks_overall BIGINT(20) UNSIGNED NOT NULL COMMENT 'total number of seconds user has been doing any tasks',
     timezone varchar(100) DEFAULT NULL COMMENT 'timezone name',
     PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE tasker.friendships (
     id int(10) UNSIGNED AUTO_INCREMENT COMMENT 'friendship ID',
@@ -32,25 +32,25 @@ CREATE TABLE tasker.friendships (
     PRIMARY KEY (id),
     FOREIGN KEY (inviter_id) REFERENCES users(id),
     FOREIGN KEY (invitee_id) REFERENCES users(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE tasker.tasks (
     id int(10) UNSIGNED AUTO_INCREMENT COMMENT 'task ID',
-    creator_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who created the task',
-    executor_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who has to execute the task',
-    type_id int(10) UNSIGNED NOT NULL COMMENT 'task type ID',
     name varchar(60) NOT NULL COMMENT 'task name, like "washing the dishes"',
     description TEXT DEFAULT NULL COMMENT 'task description',
     time_spent int(10) UNSIGNED NOT NULL COMMENT 'number of seconds spent doing the task (max is around 136.01 years)',
     created DATETIME DEFAULT NULL COMMENT 'date and time when the task was created',
     started DATETIME DEFAULT NULL COMMENT 'date and time when the user started or restarted doing the task',
     stopped DATETIME DEFAULT NULL COMMENT 'date and time when the user stopped doing the task (by finishing it or pausing it)',
-    status_id int(10) UNSIGNED NOT NULL COMMENT 'status type ID',
-    difficulty_id int(10) UNSIGNED NOT NULL COMMENT 'difficulty level ID',
-    total_exp int(10) UNSIGNED NOT NULL COMMENT 'total experience gained for the task',
-    visibility_id int(10) UNSIGNED NOT NULL COMMENT 'task visibility level for other users',
     deadline DATETIME DEFAULT NULL COMMENT 'date when the task should be finished',
+    difficulty_id int(10) UNSIGNED NOT NULL COMMENT 'difficulty level ID',
+    status_id int(10) UNSIGNED NOT NULL COMMENT 'status type ID',
+    total_exp int(10) UNSIGNED NOT NULL COMMENT 'total experience gained for the task',
+    creator_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who created the task',
+    executor_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who has to execute the task',
+    type_id int(10) UNSIGNED NOT NULL COMMENT 'task type ID',
+    visibility_id int(10) UNSIGNED NOT NULL COMMENT 'task visibility level for other users',
     PRIMARY KEY (id),
     FOREIGN KEY (creator_id) REFERENCES users(id),
     FOREIGN KEY (executor_id) REFERENCES users(id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) DEFAULT CHARSET=utf8mb4;
