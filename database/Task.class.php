@@ -13,8 +13,8 @@ class Task
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "INSERT INTO ".$this->tableName." (creator_id, executor_id, type_id, name, description, created, time_spent, started, stopped, status_id, priority_id, visibility_id, deadline)
-            VALUES (:creator_id, :executor_id, :type_id, :name, :description, :created, 0, null, null, 0, :priority_id, :visibility_id, :deadline)";
+            $sql = "INSERT INTO ".$this->tableName." (creator_id, executor_id, type_id, name, description, created, time_spent, started, stopped, status_id, priority_id, visibility_id, deadline, total_exp)
+            VALUES (:creator_id, :executor_id, :type_id, :name, :description, :created, 0, null, null, 0, :priority_id, :visibility_id, :deadline, :total_exp)";
 
             $st = $conn->prepare($sql);
 
@@ -31,7 +31,8 @@ class Task
                 'created' => $created,
                 'priority_id' => $priority_id,
                 'visibility_id' => $visibility_id,
-                'deadline' => $deadline
+                'deadline' => $deadline,
+                'total_exp' => 0
             ];
 
             $st->execute($data);
