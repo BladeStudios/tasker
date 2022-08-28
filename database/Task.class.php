@@ -65,7 +65,7 @@ class Task
                 default: $args = ""; break;
             }
 
-            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id".$args;
+            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id".$args." ORDER BY status_id DESC";
 
             $st = $conn->prepare($sql);
 
