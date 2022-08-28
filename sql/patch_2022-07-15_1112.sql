@@ -39,7 +39,7 @@ CREATE TABLE tasker.tasks (
     creator_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who created the task',
     executor_id int(10) UNSIGNED NOT NULL COMMENT 'ID of user who has to execute the task',
     type_id int(10) UNSIGNED NOT NULL COMMENT 'task type ID',
-    name varchar(32) NOT NULL COMMENT 'task name, like "washing the dishes"',
+    name varchar(60) NOT NULL COMMENT 'task name, like "washing the dishes"',
     description TEXT DEFAULT NULL COMMENT 'task description',
     time_spent int(10) UNSIGNED NOT NULL COMMENT 'number of seconds spent doing the task (max is around 136.01 years)',
     created DATETIME DEFAULT NULL COMMENT 'date and time when the task was created',

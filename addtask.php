@@ -47,7 +47,7 @@
         echo '<div id="addtaskform">
         <form method="post">'.
         $lang['addtask_name'].'<br>
-        <input type="text" name="name"/><br><br>'.
+        <input type="text" name="name" size="60"/><br><br>'.
         $lang['addtask_description'].'<br>
         <textarea name="description" rows="5" cols="100"></textarea><br><br>'.
         $lang['addtask_difficulty'].'<br>
