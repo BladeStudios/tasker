@@ -11,3 +11,8 @@ v1.0.2 beta, 2022-08-28
 
 - changed task name length from 32 to 60 characters
 - changed "task difficulty" (Easy/Medium/Hard) to "task priority" (Low/Medium/High) as task priority is more important than its difficulty
+
+V1.0.3 BETA, 2022-08-29
+
+- changed task order in tasks view (ordered by task status in descending order)
+- added possibility to edit tasks
