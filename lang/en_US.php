@@ -30,8 +30,12 @@
         'logout_failed' => 'An error occured during logging out. Please contact an administrator.',
         'tasker_description' => 'Tasker is an online task manager. It lets you add tasks with different options, like setting up a task priority, a status (to do, in progress, done etc.). It is possible to take time during the task and after that the higher priority task is, the more experience points user gets. Another function is an option to assign a task to other user, who is present on the friendlist.<br><br>In case of any questions and collaborate offers, please send an e-mail to <a href="mailto:bladestudiosit@gmail.com">bladestudiosit@gmail.com</a>.',
         'add-task' => 'Add task',
+        'edit-task' => 'Edit task',
+        'delete-task' => 'Delete task',
         'task-list' => 'Task list',
         'title_addtask' => 'Add task',
+        'title_edittask' => 'Edit task',
+        'title_deletetask' => 'Delete task',
         'label_name' => 'Task name',
         'label_description' => 'Description',
         'user_id_missing' => 'Cannot read user ID. Please log in again.',
@@ -48,6 +52,9 @@
         'level' => 'Level',
         'experience' => 'Experience points',
         'task-history' => 'Task history',
-        'task-added' => 'Task successfully added!'
+        'task-added' => 'Task successfully added!',
+        'task-edited' => 'Task successfully edited!',
+        'edit-task-link' => 'edit task',
+        'more-details' => 'more details'
     )
 ?>

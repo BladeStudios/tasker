@@ -29,7 +29,7 @@
             echo '<a href="index.php" class="btn btn-info menu-link">'.$lang['task-list'].' ('.$unfinished_tasks.')</a>';
             echo '<a href="taskhistory.php" class="btn btn-secondary menu-link">'.$lang['task-history'].' ('.$finished_tasks.')</a>';
             echo '<a href="highscores.php" class="btn btn-warning menu-link">'.$lang['highscores'].'</a>';
-            echo '<a href="addtask.php" class="btn btn-success menu-link">'.$lang['add-task'].'</a>';
+            echo '<a href="task.php?fn=add" class="btn btn-success menu-link">'.$lang['add-task'].'</a>';
             echo '<a href="logout.php" class="btn btn-danger menu-link">'.$lang['logout'].'</a></div>';
 
             echo

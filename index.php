@@ -158,8 +158,10 @@
                         <button class="btnTaskFinish btn btn-danger"'.$finishDisabled.'>FINISH TASK</button>
                     </div>
                     <div class="task-more-details-row">
-                        &#9660;more details
+                        <div class="task-more-details-button">&#9660;'.$lang['more-details'].'</div>
+                        <a href="task.php?fn=edit&id='.$task['id'].'" class="task-edit-button">'.$lang['edit-task-link'].'</a>
                     </div>
+                    <div class="for-clearing"></div>
                 </div>
                 <div class="task-more-details" data-task-id="'.$task['id'].'">
                     <div class="task-details-added">Added: '.$info->convertTimeForTimezone($task['created'],'Europe/Paris').'</div>
@@ -230,8 +232,8 @@
             toggleTask(taskId, 'finish', timeSpentElement);
         });
 
-        $('.task-more-details-row').click(function(){
-            taskElement = $(this).parent();
+        $('.task-more-details-button').click(function(){
+            taskElement = $(this).parent().parent();
             taskId = taskElement.data('task-id');
 
             moreDetailsElement = $('.task-more-details[data-task-id="'+taskId+'"');

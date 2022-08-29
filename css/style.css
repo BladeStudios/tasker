@@ -76,21 +76,6 @@ body
     margin-right: auto;
 }
 
-.task-more-details
-{
-    width: 80%;
-    max-width: 1060px;
-    border-left: solid black 1px;
-    border-right: solid black 1px;
-    border-bottom: solid black 1px;
-    background-color: white;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 3px 10px 0px 10px;
-    display: none;
-}
-
 .task-name-row
 {
     height: 50px;
@@ -153,13 +138,25 @@ body
 .task-more-details-row
 {
     padding: 3px 10px 3px 10px;
-    font-size: 12px;
-    text-align: left;
-    color: #007bff;
     clear: both;
 }
 
-.task-more-details-row:hover
+.task-more-details-button
+{
+    font-size: 12px;
+    text-align: left;
+    color: #007bff;
+    float: left;
+}
+
+.task-edit-button
+{
+    font-size: 12px;
+    color: #007bff;
+    float: right;
+}
+
+.task-more-details-button:hover
 {
     color: #0056b3;
     text-decoration: underline;
@@ -169,6 +166,21 @@ body
     -khtml-user-select: none;
     -webkit-user-select: none;
     -o-user-select: none;
+}
+
+.task-more-details
+{
+    width: 80%;
+    max-width: 1060px;
+    border-left: solid black 1px;
+    border-right: solid black 1px;
+    border-bottom: solid black 1px;
+    background-color: white;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3px 10px 0px 10px;
+    display: none;
 }
 
 .task-xp-earned
@@ -264,4 +276,9 @@ body
 #th-experience
 {
     width: 30%;
+}
+
+.for-clearing
+{
+    clear: both;
 }
