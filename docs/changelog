@@ -21,3 +21,4 @@ v1.0.4 beta, 2022-08-30
 
 - disabled possibility of adding tasks with names shorter than 3 characters
 - added changelog to the application so users can see it
+- changed default task list order - now it is sorted by task status, then by priority from higher to lower by default
