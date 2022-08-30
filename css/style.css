@@ -282,3 +282,10 @@ body
 {
     clear: both;
 }
+
+#changelog
+{
+    width: 80%;
+    margin: auto;
+    text-align: left;
+}
