@@ -136,7 +136,7 @@ class Task
                 default: $args = ""; break;
             }
 
-            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id".$args." ORDER BY status_id DESC";
+            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id".$args." ORDER BY status_id DESC, priority_id DESC";
 
             $st = $conn->prepare($sql);
 
