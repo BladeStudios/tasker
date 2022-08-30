@@ -55,6 +55,7 @@
         'task-added' => 'Task successfully added!',
         'task-edited' => 'Task successfully edited!',
         'edit-task-link' => 'edit task',
-        'more-details' => 'more details'
+        'more-details' => 'more details',
+        'task-name-too-short' => 'Task name must have at least 3 characters!'
     )
 ?>

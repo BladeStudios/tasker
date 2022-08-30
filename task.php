@@ -23,12 +23,16 @@
 
         if($_POST['fn']=='add') //add task
         {
-            if($task->addTask($_SESSION['user']['id'], $_SESSION['user']['id'],0,$_POST['name'],$_POST['description'],$_POST['priority'],$_POST['visibility'],null))
+            if(empty($_POST['name']) || mb_strlen($_POST['name'])<3)
+                $_SESSION['error'] = $lang['task-name-too-short'];
+            else if($task->addTask($_SESSION['user']['id'], $_SESSION['user']['id'],0,$_POST['name'],$_POST['description'],$_POST['priority'],$_POST['visibility'],null))
                 $_SESSION['info'] = $lang['task-added'];
         }
         else if($_POST['fn']=='edit' && isset($_POST['id'])) //edit task
         {
-            if($task->editTask($_POST['id'],$_POST['name'],$_POST['description'],$_POST['priority'],$_SESSION['user']['id']))
+            if(empty($_POST['name']) || mb_strlen($_POST['name'])<3)
+                $_SESSION['error'] = $lang['task-name-too-short'];
+            else if($task->editTask($_POST['id'],$_POST['name'],$_POST['description'],$_POST['priority'],$_SESSION['user']['id']))
             {
                 $_SESSION['info'] = $lang['task-edited'];
                 exit(header('Location: index.php'));

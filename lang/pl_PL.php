@@ -55,6 +55,7 @@
         'task-added' => 'Dodawanie zadania zakończone sukcesem!',
         'task-edited' => 'Pomyślnie zedytowano zadanie!',
         'edit-task-link' => 'edytuj zadanie',
-        'more-details' => 'więcej szczegółów'
+        'more-details' => 'więcej szczegółów',
+        'task-name-too-short' => 'Nazwa zadania musi zawierać minimum 3 znaki!'
     )
 ?>
