@@ -130,13 +130,13 @@ class Task
 
             switch($option)
             {
-                case 'all': $args = ""; break;
-                case 'unfinished': $args = " AND status_id != 3"; break;
-                case 'finished': $args = " AND status_id = 3"; break;
-                default: $args = ""; break;
+                case 'all': $args = " ORDER BY status_id DESC, priority_id DESC"; break;
+                case 'unfinished': $args = " AND status_id != 3 ORDER BY status_id DESC, priority_id DESC"; break;
+                case 'finished': $args = " AND status_id = 3 ORDER BY stopped ASC"; break;
+                default: $args = " ORDER BY status_id DESC, priority_id DESC"; break;
             }
 
-            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id".$args." ORDER BY status_id DESC, priority_id DESC";
+            $sql = "SELECT * FROM ".$this->tableName." WHERE executor_id = :user_id".$args;
 
             $st = $conn->prepare($sql);
 
