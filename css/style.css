@@ -255,6 +255,10 @@ body
 {
     text-align: center;
     border: 1px solid black;
+}
+
+#changelog-table th, td
+{
     padding: 5px;
 }
 
