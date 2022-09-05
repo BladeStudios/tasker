@@ -33,7 +33,17 @@
 
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']===true)
     {
-        echo '<div id="changelog">'.nl2br(file_get_contents('docs/changelog')).'</div>';
+        //echo '<div id="changelog">'.nl2br(file_get_contents('docs/changelog')).'</div>';
+        $xml=simplexml_load_file("docs/changelog.xml") or die("Error: Cannot create object");
+
+        echo '<div id="changelod-table-div"><table id="changelog-table">';
+        echo '<tr><th id="th-version">'.$lang['version'].'</th><th id="th-date">'.$lang['date'].'</th><th id="th-description">'.$lang['changelog-description'].'</th></tr>';
+
+        foreach($xml->row as $key => $value)
+        {
+            echo '<tr><td>'.$value->version.'</td><td>'.$value->date.'</td><td style="text-align: left">'.nl2br($value->description).'</td></tr>';
+        }
+        echo '</table></div>';
     }
     else
     {

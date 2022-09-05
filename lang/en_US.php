@@ -57,6 +57,9 @@
         'edit-task-link' => 'edit task',
         'more-details' => 'more details',
         'task-name-too-short' => 'Task name must have at least 3 characters!',
-        'changelog' => 'Changelog'
+        'changelog' => 'Changelog',
+        'version' => 'Version',
+        'date' => 'Date',
+        'changelog-description' => 'Changes'
     )
 ?>

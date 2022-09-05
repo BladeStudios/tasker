@@ -57,6 +57,9 @@
         'edit-task-link' => 'edytuj zadanie',
         'more-details' => 'więcej szczegółów',
         'task-name-too-short' => 'Nazwa zadania musi zawierać minimum 3 znaki!',
-        'changelog' => 'Lista zmian'
+        'changelog' => 'Lista zmian',
+        'version' => 'Wersja',
+        'date' => 'Data',
+        'changelog-description' => 'Zmiany'
     )
 ?>

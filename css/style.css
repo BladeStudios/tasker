@@ -243,7 +243,7 @@ body
     background-color: #00FF00;
 }
 
-#highscores-table
+#highscores-table, #changelog-table
 {
     background-color: white;
     margin: auto;
@@ -251,13 +251,14 @@ body
     width: 80%;
 }
 
-#highscores-table th, td
+#highscores-table th, td, #changelog-table th, td
 {
     text-align: center;
     border: 1px solid black;
+    padding: 5px;
 }
 
-#highscores-table-div
+#highscores-table-div, #changelog-table-div
 {
     margin-left: auto;
     margin-right: auto;
@@ -288,4 +289,19 @@ body
     width: 80%;
     margin: auto;
     text-align: left;
+}
+
+#th-version
+{
+    width: 10%;
+}
+
+#th-date
+{
+    width: 10%;
+}
+
+#changelog-desc
+{
+    text-align: left !important;
 }

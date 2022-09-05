@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+
+<row>
+<version>v1.0.0 beta</version>
+<date>2022-08-26</date>
+<description>- the first working application release</description>
+</row>
+
+<row>
+<version>v1.0.1 beta</version>
+<date>2022-08-27</date>
+<description>- fixed bug with task time counter counting time spent doing task incorrectly from client side after user clicked START TASK button in Task list view
+- fixed bug with no data shown about who is the task assigned to</description>
+</row>
+
+<row>
+<version>v1.0.2 beta</version>
+<date>2022-08-28</date>
+<description>- changed task name length from 32 to 60 characters
+- changed "task difficulty" (Easy/Medium/Hard) to "task priority" (Low/Medium/High) as task priority is more important than its difficulty</description>
+</row>
+
+<row>
+<version>v1.0.3 beta</version>
+<date>2022-08-29</date>
+<description>- changed task order in tasks view (ordered by task status in descending order)
+- added possibility to edit tasks</description>
+</row>
+
+<row>
+<version>v1.0.4 beta</version>
+<date>2022-08-30</date>
+<description>- disabled possibility of adding tasks with names shorter than 3 characters
+- added changelog to the application so users can see it
+- changed default task list order - now it is sorted by task status, then by priority from higher to lower by default</description>
+</row>
+
+<row>
+<version>v1.0.5 beta</version>
+<date>2022-08-31</date>
+<description>- changed tasks order in task history - now ordered by task finish time, ascending</description>
+</row>
+
+<row>
+<version>v1.0.6 beta</version>
+<date>2022-09-04</date>
+<description>- moved the server to other hosting due to performance problems</description>
+</row>
+
+<row>
+<version>v1.0.7 beta</version>
+<date>2022-09-05</date>
+<description>- changed the changelog view to more user-friendly table instead of raw data from a text file
+- extended a session lifetime from 24 minutes to 24 hours in order to users not getting automatically logged off too often</description>
+</row>
+
+</changelog>
