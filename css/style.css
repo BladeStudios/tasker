@@ -251,13 +251,13 @@ body
     width: 80%;
 }
 
-#highscores-table th, td, #changelog-table th, td
+#highscores-table th, #highscores-table td, #changelog-table th, #changelog-table td
 {
     text-align: center;
     border: 1px solid black;
 }
 
-#changelog-table th, td
+#changelog-table th, #changelog-table td
 {
     padding: 5px;
 }
