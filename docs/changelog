@@ -26,3 +26,7 @@ v1.0.4 beta, 2022-08-30
 v1.0.5 beta, 2022-08-31
 
 - changed tasks order in task history - now ordered by task finish time, ascending
+
+v1.0.6 beta, 2022-09-05
+
+- moved the server to other hosting due to performance problems
