@@ -55,4 +55,10 @@
 - extended a session lifetime from 24 minutes to 24 hours in order to users not getting automatically logged off too often</description>
 </row>
 
+<row>
+<version>v1.0.8 beta</version>
+<date>2022-09-06</date>
+<description>- task list is now ordered by status > priority > last pause time > create time, so if you pause a task, it will be always on the top; also if you add a new task with high priority - it will be on the top of "TODO" high priority tasks</description>
+</row>
+
 </changelog>
