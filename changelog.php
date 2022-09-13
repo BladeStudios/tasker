@@ -43,7 +43,7 @@
         {
             echo '<tr><td>'.$value->version.'</td><td>'.$value->date.'</td><td style="text-align: left">'.nl2br($value->description).'</td></tr>';
         }
-        echo '</table></div>';
+        echo '</table></div><br>';
     }
     else
     {
