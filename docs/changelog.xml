@@ -61,4 +61,10 @@
 <description>- task list is now ordered by status > priority > last pause time > create time, so if you pause a task, it will be always on the top; also if you add a new task with high priority - it will be on the top of "TODO" high priority tasks</description>
 </row>
 
+<row>
+<version>v1.0.9 beta</version>
+<date>2022-09-13</date>
+<description>- added a possibility to edit task finish (pause) time in case user forgot to finish (pause) it and the clock counted too much time</description>
+</row>
+
 </changelog>
