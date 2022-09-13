@@ -48,19 +48,26 @@ class Task
         }
     }
 
-    public function editTask($task_id,$name,$description,$priority_id,$editor_id)
+    public function editTask($task_id,$name,$description,$priority_id,$editor_id,$time_stopped,$prev_stopped,$prev_time_spent)
     {
         require_once('database/Database.class.php');
 
         try
         {
+            require_once('src/Calc.class.php');
+            $calc = new Calc();
+            $diff = $calc->getSecondsBetweenDates($time_stopped,$prev_stopped);
+
+            require_once('src/Info.class.php');
+            $info = new Info();
+
+            $new_time_spent = $prev_time_spent - $diff;
+            $new_exp = $info->getExpByTimeSpent($new_time_spent,$priority_id);
+
             $db_obj = new Database();
             $conn = $db_obj->connect();
 
-            $sql = "INSERT INTO ".$this->tableName." (creator_id, executor_id, type_id, name, description, created, time_spent, started, stopped, status_id, priority_id, visibility_id, deadline, total_exp)
-            VALUES (:creator_id, :executor_id, :type_id, :name, :description, :created, 0, null, null, 0, :priority_id, :visibility_id, :deadline, :total_exp)";
-
-            $sql = "UPDATE ".$this->tableName." SET name=:name, description=:description, priority_id=:priority_id, editor_id=:editor_id, edited=:edited WHERE id=:task_id";
+            $sql = "UPDATE ".$this->tableName." SET name=:name, description=:description, priority_id=:priority_id, editor_id=:editor_id, edited=:edited, stopped=:time_stopped, time_spent=:new_time_spent, total_exp=:new_exp WHERE id=:task_id";
 
             $st = $conn->prepare($sql);
 
@@ -74,7 +81,10 @@ class Task
                 'priority_id' => $priority_id,
                 'editor_id' => $editor_id,
                 'edited' => $edited,
-                'task_id' => $task_id
+                'task_id' => $task_id,
+                'time_stopped' => $time_stopped,
+                'new_time_spent' => $new_time_spent,
+                'new_exp' => $new_exp
             ];
 
             $st->execute($data);

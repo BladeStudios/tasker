@@ -223,6 +223,13 @@ class Info
         return $minimum_exp;
     }
 
+    public function getExpByTimeSpent($seconds_spent, $priority_id)
+    {
+        $res = $seconds_spent/(60/self::getExpPerMin()[$priority_id]);
+        //return max($res,self::getMinimumExp()[$priority_id]);
+        return $res;
+    }
+
     public function isTaskRunning($start_date, $stop_date)
     {
         if($start_date===null)

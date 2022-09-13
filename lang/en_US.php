@@ -60,6 +60,9 @@
         'changelog' => 'Changelog',
         'version' => 'Version',
         'date' => 'Date',
-        'changelog-description' => 'Changes'
+        'changelog-description' => 'Changes',
+        'edittask_started' => 'Task started',
+        'edittask_paused' => 'Task paused',
+        'pause-date-too-early' => 'Task pause time must be after task start time.'
     )
 ?>

@@ -32,7 +32,11 @@
         {
             if(empty($_POST['name']) || mb_strlen($_POST['name'])<3)
                 $_SESSION['error'] = $lang['task-name-too-short'];
-            else if($task->editTask($_POST['id'],$_POST['name'],$_POST['description'],$_POST['priority'],$_SESSION['user']['id']))
+            else if(isset($_POST['stopped']) && strtotime($_POST['stopped'])<=strtotime($_POST['started']))
+            {
+                $_SESSION['error'] = $lang['pause-date-too-early'];
+            }
+            else if($task->editTask($_POST['id'],$_POST['name'],$_POST['description'],$_POST['priority'],$_SESSION['user']['id'],$_POST['stopped'],$_POST['prev-stopped'], $_POST['time_spent']))
             {
                 $_SESSION['info'] = $lang['task-edited'];
                 exit(header('Location: index.php'));
@@ -90,25 +94,52 @@
             $task_info = $task->getTask($taskId);
             $selected = array('','','');
             $selected[$task_info['priority_id']] = ' selected';
+            $pausedDisable = 'disabled';
+            if(!empty($task_info['stopped'])) $pausedDisable = '';
 
             echo '<div id="title">'.$lang['title_edittask'].'</div><br>';
             echo '<div id="edittaskform">
-            <form method="post">'.
-            $lang['addtask_name'].'<br>
-            <input type="text" name="name" size="60" maxlength="60" value="'.$task_info['name'].'"/><br><br>'.
-            $lang['addtask_description'].'<br>
-            <textarea name="description" rows="8" cols="50" maxlength="500">'.$task_info['description'].'</textarea><br><br>'.
-            $lang['addtask_priority'].'<br>
-            <select name="priority">
-                <option value="0"'.$selected[0].'>'.$lang['addtask_low'].'</option>
-                <option value="1"'.$selected[1].'>'.$lang['addtask_medium'].'</option>
-                <option value="2"'.$selected[2].'>'.$lang['addtask_high'].'</option>
-            </select><br><br>
-            <input type="hidden" value="3" name="visibility"/>
-            <input type="hidden" value="edit" name="fn"/>
-            <input type="hidden" value="'.$taskId.'" name="id"/>
-            <input type="submit" class="btn btn-success center-in-div" value="'.$lang['edit-task'].'"/>
-            </form>';
+            <form method="post">
+            <div>
+            <table id="edit-task-form-table" style="margin: auto; padding: 5px;">
+                <tr>
+                    <td>'.$lang['addtask_name'].'</td>
+                    <td><input type="text" name="name" style="width: 600px" maxlength="60" value="'.$task_info['name'].'"/></td>
+                </tr>
+                <tr>
+                    <td>'.$lang['addtask_description'].'</td>
+                    <td><textarea style="width: 600px" name="description" rows="8" maxlength="500">'.$task_info['description'].'</textarea></td>
+                </tr>
+                <tr>
+                    <td>'.$lang['addtask_priority'].'</td>
+                    <td>
+                        <select name="priority">
+                            <option value="0"'.$selected[0].'>'.$lang['addtask_low'].'</option>
+                            <option value="1"'.$selected[1].'>'.$lang['addtask_medium'].'</option>
+                            <option value="2"'.$selected[2].'>'.$lang['addtask_high'].'</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>'.$lang['edittask_started'].'</td>
+                    <td><input type="datetime-local" name="paused" value="'.$task_info['started'].'" step="1" disabled/></td>
+                </tr>
+                <tr>
+                    <td>'.$lang['edittask_paused'].'</td>
+                    <td><input type="datetime-local" name="stopped" value="'.$task_info['stopped'].'" step="1"'.$pausedDisable.'/></td>
+                </tr>
+                <input type="hidden" value="3" name="visibility"/>
+                <input type="hidden" value="'.$task_info['started'].'" name="started"/>
+                <input type="hidden" name="prev-stopped" value="'.$task_info['stopped'].'"/>
+                <input type="hidden" name="time_spent" value="'.$task_info['time_spent'].'"/>
+                <input type="hidden" value="edit" name="fn"/>
+                <input type="hidden" value="'.$taskId.'" name="id"/>
+                <tr>
+                    <td colspan="2" style="text-align: center;"><input type="submit" class="btn btn-success center-in-div" value="'.$lang['edit-task'].'"/></td>
+                </tr>
+            </table>
+        </div>
+        </form>';
         }
     }
     else

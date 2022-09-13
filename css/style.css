@@ -309,3 +309,8 @@ body
 {
     text-align: left !important;
 }
+
+#edit-task-form-table td
+{
+    padding: 2px;
+}

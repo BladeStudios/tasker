@@ -60,6 +60,9 @@
         'changelog' => 'Lista zmian',
         'version' => 'Wersja',
         'date' => 'Data',
-        'changelog-description' => 'Zmiany'
+        'changelog-description' => 'Zmiany',
+        'edittask_started' => 'Zadanie rozpoczęte',
+        'edittask_paused' => 'Zadanie zakończone',
+        'pause-date-too-early' => 'Czas ukończenia zadania musi być późniejszy niż czas jego rozpoczęcia.'
     )
 ?>
