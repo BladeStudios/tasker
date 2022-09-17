@@ -67,4 +67,10 @@
 <description>- added a possibility to edit task finish (pause) time in case user forgot to finish (pause) it and the clock counted too much time</description>
 </row>
 
+<row>
+<version>v1.0.10 beta</version>
+<date>2022-09-17</date>
+<description>- changed finished tasks order from ascending to descending by finish time</description>
+</row>
+
 </changelog>
