@@ -142,7 +142,7 @@ class Task
             {
                 case 'all': $args = " ORDER BY status_id DESC, priority_id DESC"; break;
                 case 'unfinished': $args = " AND status_id != 3 ORDER BY status_id DESC, priority_id DESC, stopped DESC, created DESC"; break;
-                case 'finished': $args = " AND status_id = 3 ORDER BY stopped ASC"; break;
+                case 'finished': $args = " AND status_id = 3 ORDER BY stopped DESC"; break;
                 default: $args = " ORDER BY status_id DESC, priority_id DESC"; break;
             }
 
